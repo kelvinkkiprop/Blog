@@ -1,0 +1,59 @@
+//-------------------------LARAVEL-------------------------//
+1. Installation
+composer create-project --prefer-dist laravel/laravel blog
+
+2. Auth
+composer require laravel/ui
+php artisan ui vue
+php artisan ui vue --auth
+npm install
+
+3. Migrations
+php artisan make:model Other/UserType -m
+
+4. Seeders
+php artisan make:seeder UserTypeSeeder
+
+5. Controllers
+php artisan make:controller MainMenu/WelcomeController
+php artisan make:controller MainMenu/UserController -r
+
+6. API Controllers
+php artisan make:controller MainMenu/UserController -r
+php artisan make:controller Settings/ProfileController -r
+
+
+<!--------------------Vue------------------>
+1. Vue Router Installation
+npm install vue-router --save
+
+2. Installing Vue Toastr
+npm install --save vue-toastr 
+
+3. Installing Axios
+npm install axios --save
+
+4. Installing Moment
+npm install moment --save
+
+5. Installing sweetalert
+npm install sweetalert --save
+
+
+<!--------------------AdminLTE------------------>
+1. Installation
+npm install admin-lte@v3.0.5 --save 
+2. Usage
+Add to below app.scss
+@import '~admin-lte/dist/css/adminlte.css';
+
+<!--------------------Font Awesome------------------>
+1. Installation
+npm install --save @fortawesome/fontawesome-free
+
+2. Usage
+Add to below app.scss
+$fa-font-path:"../webfonts";
+@import "~/fontawesome/scss/fontawesome.scss";
+@import "~/fontawesome/scss/solid.scss";
+@import "~/fontawesome/scss/brands.scss";
