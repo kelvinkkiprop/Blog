@@ -10,13 +10,16 @@ npm install
 
 3. Migrations
 php artisan make:model Other/UserStatus -m
+php artisan make:model Other/PostCategory -m
+php artisan make:model Menu/Post -m
 
 4. Seeders
 php artisan make:seeder UserStatusSeeder
+php artisan make:seeder PostCategorySeeder
 
 5. Controllers
 php artisan make:controller MainMenu/WelcomeController
-php artisan make:controller MainMenu/UserController -r
+php artisan make:controller MainMenu/PostController -r
 
 6. API Controllers
 php artisan make:controller MainMenu/UserController -r

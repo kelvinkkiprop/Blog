@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Add
 use App\User;
+use App\Other\PostCategory;
 
 class InsightController extends Controller
 {
@@ -15,7 +16,7 @@ class InsightController extends Controller
     public function index()
     {
 
-        $top_posts_count = User::count();
+        $post_categories_count = PostCategory::count();
         $posts_count = User::count();
         $users_count = User::count();
         $visits_count = User::count();
@@ -23,7 +24,7 @@ class InsightController extends Controller
         $recent_users = User::orderBy('id', 'desc')->get()->take(5);
 
         return response()->json([
-            'top_posts_count' => $top_posts_count,
+            'post_categories_count' => $post_categories_count,
             'posts_count' => $posts_count,
             'users_count' => $users_count,
             'visits_count' => $visits_count,

@@ -27,8 +27,9 @@
                                 <select id="type" type="text" class="form-control" name="type" 
                                 v-model="user.type" autocomplete="type" autofocus required>
                                     <option value="0" disabled="true" selected="true">--- Select Type ---</option>
-                                    <option value="1">System Administrator</option>
-                                    <option value="2">Normal</option>
+                                    <option v-for="user_type in user_types" :value="user_type.id" :key="user_type.id">
+                                        {{ user_type.name }}
+                                    </option>
                                 </select>
                             </div>  
 
@@ -50,27 +51,34 @@
     export default {
         //Data
         data() {
+
             return { 
-                //User object
-                user: {},  
+                user_types: [],
                 user: {
                     name: '',
                     email: '',
                     type: ''
                 },            
             }
+            
         },
 
         //Created
          created() {
-             //User if drom vue router
+
+             //User from all users
             this.id = this.$route.params.id;
             var uid = this.id;
             // console.log('This is my id from vue router'+uid);
              axios.get('/api/users/'+uid+'/edit').then((response)=>{
                 // this.users = response.data;
-                console.log(response.data.id);
                 this.user = response.data;
+            });
+
+            //Fetch user types
+             axios.get('/api/user_types').then((response)=>{
+                // console.log(response.data);
+                this.user_types = response.data;
             });
 
         },
@@ -81,14 +89,11 @@
             //Update
             updateUser(id){
 
-                //Show
-                this.$Progress.start();
-
                 // console.log(this.user.name);
                 var data = this.user;
                 axios.put('/api/users/'+id, data)
                 .then(response => {
-                    console.log(response);
+
                     //Clear form
                     this.user =   {
                         name: '',
@@ -102,9 +107,6 @@
                     //Show                    
                     this.$toastr.i(""+response.data.message, "Info");
 
-                    //Close
-                    this.$Progress.finish();
-
                 }).catch(error => {
                     var toastr = this.$toastr;
                     Object.values(error.response.data.errors).forEach(function(value) {
@@ -112,8 +114,6 @@
                         toastr.e(value[0], "Error");
 
                     });
-                    //Finish
-                    this.$Progress.fail();
                     
                 })
             },

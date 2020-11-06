@@ -16,3 +16,59 @@ $fa-font-path:"../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
+
+
+/*--------------------------------------AdminLTE------------------------------------------*/
+#adminLTE{
+.main-header{
+background: $green;
+border-top: 2px solid $yellow;
+a{
+// color: $white !important;
+}
+
+}
+.main-sidebar{
+.router-link-exact-active{
+background-color: $green;
+color: $white !important;
+border-left: $yellow 5px solid; 
+}
+.has-treeview{
+.nav-treeview>li>a,.far{
+padding-top: 0;
+padding-bottom: 0;
+font-size: 14px;
+}
+}
+}
+.content-wrapper{
+.required:after {
+content:" *";
+color: $red;
+}
+}
+
+}
+/*--------------------------------------./AdminLTE------------------------------------------*/
+
+
+
+/*--------------------------------------Auth------------------------------------------*/
+#auth{
+              min-height: 90vh !important;
+}
+/*--------------------------------------./Auth------------------------------------------*/
+
+/*--------------------------------------Footer------------------------------------------*/
+#footer{
+min-height: calc(100vh - 90vh);
+background: $black;
+color: $white;
+padding: 20px;
+font-size: 14px;
+font-weight: 600;
+text-align: center;
+              
+}
+/*--------------------------------------./Footer------------------------------------------*/

@@ -13,8 +13,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>{{ top_posts }}</h3>
-                                        <p>Top Posts</p>
+                                        <h3>{{ post_categories }}</h3>
+                                        <p>Post Categories</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
@@ -99,7 +99,7 @@
         //Data
         data() {
             return { 
-                top_posts: '',
+                post_categories: '',
                 posts : '', 
                 users : '', 
                 visits : '',
@@ -113,7 +113,7 @@
             loadInsights(){                            
                 axios.get('api/insights')
                 .then(response => {
-                    this.top_posts = response.data.top_posts_count;
+                    this.post_categories = response.data.post_categories_count;
                     this.posts = response.data.posts_count;
                     this.users = response.data.users_count;
                     this.visits = response.data.visits_count;

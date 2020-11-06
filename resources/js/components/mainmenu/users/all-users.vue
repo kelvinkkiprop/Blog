@@ -39,7 +39,7 @@
                                         <td><span class="badge badge-success">{{ user.user_status.name }}</span></td>
                                         <td>{{user.created_at | myDate }}</td>
                                         <td>
-                                            <router-link :to="'/edituser/' + user.id" class="btn btn-dark btn-sm">
+                                            <router-link :to="'/edit-user/' + user.id" class="btn btn-dark btn-sm">
                                                 <i class="fas fa-edit" aria-hidden="true"></i>
                                             </router-link>
                                             <button class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
@@ -88,7 +88,7 @@
                 axios.get('api/users')
                 .then(response => {
                     this.users = response.data;
-                    console.log(this.users);
+                    // console.log(this.users);
                 });
             },
 

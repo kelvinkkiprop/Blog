@@ -1,3 +1,3 @@
 <section id="footer">
-    <p>&copy;&nbsp;{{Date('Y')}}&nbsp;{{config('app.name', 'Todo App')}}</p>
+    <p>&copy;&nbsp;{{Date('Y')}}&nbsp;{{config('app.name', 'Blog')}}</p>
 </section>

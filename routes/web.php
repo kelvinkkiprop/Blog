@@ -15,6 +15,39 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
+/*
+|--------------------------------------------------------------------------
+| About Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/about', function () {
+    return view('others.about');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Contact Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/contact', function () {
+    return view('others.contact');
+});
+
+/*
+|--------------------------------------------------------------------------
+| our Service Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/services', function () {
+    return view('others.services');
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | Auth Routes
@@ -43,4 +76,4 @@ Route::get('/dashboard', 'MainMenu\DashboardController@index')->name('dashboard'
 | Prevent Laravel Route Errors
 |--------------------------------------------------------------------------
 */
-Route::get('{any}', 'MainMenu\DashboardController@index')->where("any", ".*");
+Route::get('{any}', 'HomeController@index')->where("any", ".*");

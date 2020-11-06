@@ -10,10 +10,9 @@
                     <div class="card-header">
                         <h3 class="card-title">Posts</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success btn-sm"  type="button"
-                            data-toggle="modal" data-target="#addNewModal">Add New
-                            <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>
-                            </button>
+                            <router-link to="create-post" class="btn btn-success btn-sm">Add New
+                                <i class="fas fa-blog fa-fw" aria-hidden="true"></i>
+                            </router-link>
                         </div>
                     </div>
 
@@ -23,6 +22,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Category</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Image</th>
@@ -33,8 +33,9 @@
                                 <tbody>
                                     <tr v-for="(post, index) in posts" :key="post.id">
                                         <td>{{ index+1 }}</td>
+                                         <td>{{ post.post_category.name }}</td>
                                         <td>{{ post.title | capitalize }}</td>
-                                        <th>{{ post.description }}</th>
+                                        <td>{{ post.description }}</td>
                                         <td>{{ post.image }}</td>
                                         <td>{{post.created_at | myDate }}</td>
                                         <td>
@@ -122,7 +123,7 @@
 
         //Mount
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         },
 
         //Created

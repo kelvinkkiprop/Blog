@@ -17,8 +17,8 @@
 
     <div class="wrapper">
 
-        <!-----------------------------------------App-------------------------------------------------->
-        <section id="app">
+        <!-----------------------------------------AdminLTE-------------------------------------------------->
+        <section id="adminLTE">
 
             <!-----------------------------------------Nav--------------------------------------------------->
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -49,11 +49,11 @@
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <router-link to="/messages" class="dropdown-item">
-                                <i class="fas fa-comments" aria-hidden="true"></i>&nbsp;Messages</a>
-                            </router-link>                            
+                            <a href="/home" class="dropdown-item">
+                                <i class="fas fa-home fa-fw" aria-hidden="true"></i>Home</a>
+                            </a>                            
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;Logout</a>
+                            <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>                            
@@ -73,15 +73,10 @@
                 <div class="content-header">
                     <div class="container-fluid">
 
-                        {{-- <main class="py-4">
-                            @yield('content')
-                        </main> --}}
-
-                        <!-- Render route component -->
-                        <router-view></router-view>
-                        
-                        <!-- set progressbar -->
-                        {{-- <vue-progress-bar></vue-progress-bar> --}}
+                        <main class="py-4">
+                            <!-- Render route component -->
+                            <router-view></router-view>
+                        </main>
                         
                     </div>
                 </div>
@@ -95,7 +90,7 @@
             <!-----------------------------------------./ContentWrapper--------------------------------------------------->
 
         </section>
-        <!-----------------------------------------./App--------------------------------------------------->
+        <!-----------------------------------------./AdminLTE--------------------------------------------------->
    
         <!-----------------------------------------Footer--------------------------------------------------->
         <footer class="main-footer">

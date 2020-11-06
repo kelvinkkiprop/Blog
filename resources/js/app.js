@@ -69,16 +69,17 @@ Vue.filter('capitalize', function (value) {
  */
 const routes = [
     //Dashboard
-    { path: '/dashboard', component: require('./components/mainmenu/dashboard.vue').default },
+    { path: '/dashboard', name:'dashboard', component: require('./components/mainmenu/dashboard.vue').default },
 
     //Posts
-    { path: '/posts', component: require('./components/mainmenu/posts/all-posts.vue').default },
+    { path: '/posts', name:'posts', component: require('./components/mainmenu/posts/all-posts.vue').default },
+    { path: '/create-post', name:'create-post',component: require('./components/MainMenu/posts/create-post.vue').default },
+    { path: '/edit-post/:id', name:'edit-post', component: require('./components/MainMenu/posts/edit-post.vue').default },
 
     //Users
     { path: '/users', name:'users', component: require('./components/mainmenu/users/all-users.vue').default },
-    { path: '/create-user', component: require('./components/MainMenu/users/create-user.vue').default },
-    { path: '/edit-user/:id', component: require('./components/MainMenu/users/edit-user.vue').default },
-    
+    { path: '/create-user', name:'create-user', component: require('./components/MainMenu/users/create-user.vue').default },
+    { path: '/edit-user/:id', name:'edit-user', component: require('./components/MainMenu/users/edit-user.vue').default },
 
   ]
 
@@ -97,6 +98,6 @@ const router = new VueRouter({
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#adminLTE',
     router //Call routes
 });

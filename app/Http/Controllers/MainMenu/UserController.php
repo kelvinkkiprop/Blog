@@ -90,7 +90,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return $user;
     }
 
     /**
@@ -101,8 +102,27 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { 
+        $this -> validate($request, [  
+            'name' => 'required|string|max:255',
+            'type' => 'required',
+            'email' => 'required|string|email|max:255',
+            // 'password' => 'required|string|min:6',
+        ]);
+
+
+        User::where('id', $id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'type' => $request['type'],
+            'password' => Hash::make('Password'),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User updated successfully',
+        ],201);
+
     }
 
     /**

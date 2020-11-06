@@ -45,3 +45,21 @@ Route::resource('users', 'MainMenu\UserController');
 */
 Route::get('user_types', 'Other\UserTypeController@index');
 
+/*
+|--------------------------------------------------------------------------
+| Post Category Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('post_categories', 'Other\PostCategoryController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Post Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::resource('posts', 'MainMenu\PostController');
+
+
+

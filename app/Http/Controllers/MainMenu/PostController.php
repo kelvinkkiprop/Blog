@@ -4,6 +4,8 @@ namespace App\Http\Controllers\MainMenu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+//Add
+use App\Menu\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->get();
+        return $posts;
     }
 
     /**
@@ -35,7 +38,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request, [  
+            'category' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            // 'image' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
+
+        Post::create([
+            'category' => $request['category'],
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'image' => $request['image']
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Post created successfully',
+        ],201);
+
     }
 
     /**
@@ -57,7 +78,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return $post;
     }
 
     /**
@@ -69,7 +91,24 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request, [  
+            'category' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            // 'image' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
+
+        Post::where('id', $id)->update([
+            'category' => $request['category'],
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'image' => $request['image']
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Post updated successfully',
+        ],201);
     }
 
     /**
@@ -80,6 +119,13 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Post removed successfully',
+        ],201);
+
     }
 }
