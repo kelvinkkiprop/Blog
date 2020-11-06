@@ -35,8 +35,8 @@
                                         <td>{{ index+1 }}</td>
                                         <td>{{ user.name | capitalize }}</td>
                                         <td>{{ user.email }}</td>
-                                        <th>{{ user.type }}</th>
-                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>{{ user.user_type.name }}</td>
+                                        <td><span class="badge badge-success">{{ user.user_status.name }}</span></td>
                                         <td>{{user.created_at | myDate }}</td>
                                         <td>
                                             <router-link :to="'/edituser/' + user.id" class="btn btn-dark btn-sm">
@@ -59,50 +59,6 @@
         </div>
 
 
-        <!-- Add New Modal -->
-        <div class="modal" id="addNewModal">
-            <div class="modal-dialog">
-                <div class="modal-content"> 
-                    <form method="POST" @submit.prevent="createNew()">                        
-                        <div class="modal-header bg-success text-white">
-                            <h4 class="modal-title">Add User</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Name  -->                           
-                            <div class="form-group">
-                                <label for="name" class="col-form-label required">Name:</label>
-                                <input id="name" type="name" class="form-control" name="name"
-                                v-model="user.name" autocomplete="name" autofocus required>
-                            </div> 
-                            <!-- Email  -->
-                            <div class="form-group">
-                                <label for="email" class="col-form-label required">Email:</label>
-                                <input id="email" type="email" class="form-control" name="email"
-                                v-model="user.email" autocomplete="email" autofocus required>
-                            </div>                                
-                            <!-- Type  -->                        
-                            <div class="form-group">
-                                <label for="type" class="col-form-label required">Type:</label>
-                                <select id="type" type="text" class="form-control" name="type" 
-                                v-model="user.type" autocomplete="type" autofocus required>
-                                    <option value="0" disabled="true" selected="true">--- Select Type ---</option>
-                                    <option value="1">System Administrator</option>
-                                    <option value="2">Normal</option>
-                                </select>
-                            </div>                        
-                        </div>
-                        <div class="modal-footer bg-dark">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- ./ Add New Modal -->
-
-
     </div>
     <!-- ./Container -->
 
@@ -111,8 +67,6 @@
 <script>
 
     export default {
-        //Props for user editing
-        // props:['user'],
 
         //Data
         data() {
@@ -133,56 +87,9 @@
             loadUsers(){                            
                 axios.get('api/users')
                 .then(response => {
-                    response.data
                     this.users = response.data;
-                    // console.log(this.users);
+                    console.log(this.users);
                 });
-            },
-
-            //Create
-            createNew(){
-
-                //Show
-                this.$Progress.start();
-
-                // console.log(this.user.name);
-                var data = this.user;
-                axios.post('api/users', data)
-                .then(response => {
-                    // console.log(response);
-                    //Clear form
-                    this.user =   {
-                        name: '',
-                        email: '',
-                        type: ''
-                    }   
-
-                    //Close
-                    $('#addNewModal').modal('hide');
-
-                    //Show                    
-                    this.$toastr.s(""+response.data.message, "Success");
-
-                    //Load users
-                    this.loadUsers();
-
-                    //Using our custom Fire Event
-                    // Fire.$emit('AfterCreate');
-
-                    //Close
-                    this.$Progress.finish();
-
-                }).catch(error => {
-                    var toastr = this.$toastr;
-                    Object.values(error.response.data.errors).forEach(function(value) {
-                        // alert(value[0]); 
-                        toastr.e(value[0], "Error");
-
-                    });
-                    //Finish
-                    this.$Progress.fail();
-                    
-                })
             },
 
             //Delete User
@@ -197,9 +104,7 @@
                 cancelButtonColor: '#881F1C',
                 confirmButtonText: 'Yes'
                 }).then((result) => {      
-                    if (result.isConfirmed) {                   
-                        //Show
-                        this.$Progress.start();
+                    if (result.isConfirmed) {       
                         //Send request to serve   
                         axios.delete('/api/users/'+id).then((response)=>{
                             // console.log(response);  
@@ -208,15 +113,11 @@
                             //Call
                             this.loadUsers();
                         });
-                        //Close
-                        this.$Progress.finish();
+
                     }
                 }).catch(error => {
                     var toastr = this.$toastr;                   
-                    toastr.e('Failed to delete user', "Error");
-                    //Finish
-                    this.$Progress.fail();
-                    
+                    toastr.e('Failed to delete user', "Error");                    
                 })
             }
 
@@ -224,28 +125,13 @@
 
         //Mount
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         },
 
         //Created
         created() {
-            //Show
-            this.$Progress.start();
             //Call
             this.loadUsers();
-            //Close
-            this.$Progress.finish();
-
-            //Load users after every 3 seconds
-            // setInterval(() => {                
-            //     this.loadUsers();
-            // }, 3000);
-
-            //Listen to our event
-            // Fire.$on('AfterCreate',  () => {                
-            //     this.loadUsers();
-            // }, 3000);
-
         }
 
     }

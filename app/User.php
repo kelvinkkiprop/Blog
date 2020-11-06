@@ -6,6 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+//Add
+use App\Other\UserType;
+use App\Other\UserStatus;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -16,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'type', 'password',
     ];
 
     /**
@@ -36,4 +40,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+    * Get User Type
+    */
+    public function UserType() {
+        return $this->hasOne(UserType::class, 'id', 'type');
+    }  
+    
+    /**
+    * Get User Status
+    */
+    public function UserStatus() {
+        return $this->hasOne(UserStatus::class, 'id', 'status');
+    } 
+
+
 }

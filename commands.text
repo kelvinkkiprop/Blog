@@ -9,10 +9,10 @@ php artisan ui vue --auth
 npm install
 
 3. Migrations
-php artisan make:model Other/UserType -m
+php artisan make:model Other/UserStatus -m
 
 4. Seeders
-php artisan make:seeder UserTypeSeeder
+php artisan make:seeder UserStatusSeeder
 
 5. Controllers
 php artisan make:controller MainMenu/WelcomeController

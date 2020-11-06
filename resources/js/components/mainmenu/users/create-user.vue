@@ -25,9 +25,11 @@
                             <div class="form-group">
                                 <label for="type" class="col-form-label required">Type:</label>
                                 <select id="type" type="text" class="form-control" name="type" 
-                                autocomplete="type" autofocus required v-bind="(type, index) in users_types" :key="type.id">
+                                v-model="user.type" autocomplete="type" autofocus required>
                                     <option value="0" disabled="true" selected="true">--- Select User Type ---</option>
-                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                    <option v-for="user_type in user_types" :value="user_type.id" :key="user_type.id">
+                                        {{ user_type.name }}
+                                    </option>
                                 </select>
                             </div>  
 
@@ -50,9 +52,8 @@
         //Data
         data() {
             return { 
-                //User object
                 user: {}, 
-                user_types: {}, 
+                user_types: [], 
                 user: {
                     name: '',
                     email: '',
@@ -77,6 +78,7 @@
 
                 // console.log(this.user.name);
                 var data = this.user;
+                // console.log(data);
                 axios.post('/api/users/', data)
                 .then(response => {
                     // console.log(response);
@@ -91,7 +93,7 @@
                     this.$router.push({ name: 'users' })
 
                     //Show                    
-                    this.$toastr.i(""+response.data.message, "Info");
+                    this.$toastr.s(""+response.data.message, "Success");
 
                 }).catch(error => {
                     var toastr = this.$toastr;
