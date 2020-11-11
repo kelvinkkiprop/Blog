@@ -31,7 +31,13 @@
                                         {{ user_type.name }}
                                     </option>
                                 </select>
-                            </div>  
+                            </div>   
+                            <!-- Password  -->
+                            <div class="form-group">
+                                <label for="password" class="col-form-label required">Password:</label>
+                                <input id="password" type="password" class="form-control" name="password"
+                                v-model="user.password" autocomplete="password" autofocus required>
+                            </div> 
 
                             <!-- Buttons --> 
                             <button type="submit" class="btn btn-success">Save</button>
@@ -57,7 +63,8 @@
                 user: {
                     name: '',
                     email: '',
-                    type: ''
+                    type: '',
+                    password: ''
                 },            
             }
         },
@@ -86,7 +93,8 @@
                     this.user =   {
                         name: '',
                         email: '',
-                        type: ''
+                        type: '',
+                        password: ''
                     }   
 
                     //Redirect to users

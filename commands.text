@@ -60,3 +60,15 @@ $fa-font-path:"../webfonts";
 @import "~/fontawesome/scss/fontawesome.scss";
 @import "~/fontawesome/scss/solid.scss";
 @import "~/fontawesome/scss/brands.scss";
+
+
+
+<!--------------------Package------------------>
+1. Intervation Image
+a. Installation
+composer require intervention/image
+b.Usage (Add to app.config)
+providers
+Intervention\Image\ImageServiceProvider::class,
+aliases
+'Image' => Intervention\Image\Facades\Image::class,

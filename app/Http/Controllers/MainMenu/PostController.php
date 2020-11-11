@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Add
 use App\Menu\Post;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -38,6 +41,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
+
         $this -> validate($request, [  
             'category' => 'required|integer',
             'title' => 'required|string|max:255',
@@ -45,11 +50,26 @@ class PostController extends Controller
             // 'image' => 'required|image|mimes:jpg,jpeg,png',
         ]);
 
+        $filename = '';
+        $image = $request->input('image');  //As Base64 String 
+        if($image){//Has photo
+            $filename   = time().'.'.explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1]; //Get extension
+            // return $filename;
+            //Resize   
+            $img = Image::make($image);
+             $img =$img->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();                 
+            });    
+            $img->stream();    
+            // //Store
+            Storage::disk('local')->put('public/blog_images/'.$filename, $img, 'public');
+        }
+
         Post::create([
             'category' => $request['category'],
             'title' => $request['title'],
             'description' => $request['description'],
-            'image' => $request['image']
+            'image' => $filename
         ]);
 
         return response()->json([
@@ -91,6 +111,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->all();
+
         $this -> validate($request, [  
             'category' => 'required|integer',
             'title' => 'required|string|max:255',
@@ -98,11 +120,34 @@ class PostController extends Controller
             // 'image' => 'required|image|mimes:jpg,jpeg,png',
         ]);
 
+        //Delete old image
+        $post = Post::find($id);
+        $image_url = public_path("storage/blog_images/".$post->image);
+        //return $image_url;        
+        if(File::exists($image_url)){
+            File::delete($image_url);
+        } 
+        
+        $filename = '';
+        $image = $request->input('image');  //As Base64 String 
+        if($image){//Has photo
+            $filename   = time().'.'.explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1]; //Get extension
+            // return $filename;
+            //Resize   
+            $img = Image::make($image);
+             $img =$img->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();                 
+            });    
+            $img->stream();    
+            // //Store
+            Storage::disk('local')->put('public/blog_images/'.$filename, $img, 'public');
+        }
+
         Post::where('id', $id)->update([
             'category' => $request['category'],
             'title' => $request['title'],
             'description' => $request['description'],
-            'image' => $request['image']
+            'image' => $filename
         ]);
 
         return response()->json([
@@ -120,6 +165,12 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+            //Delete image
+            $image_url = public_path("storage/blog_images/".$post->image);
+            //return $image_url;        
+            if(File::exists($image_url)){
+                File::delete($image_url);
+            } 
         $post->delete();
 
         return response()->json([

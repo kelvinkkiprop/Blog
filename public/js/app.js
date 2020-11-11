@@ -1991,30 +1991,54 @@ __webpack_require__.r(__webpack_exports__);
   },
   //Method
   methods: {
-    //Create
-    createPost: function createPost() {
+    //Upload Image
+    handleImageFieldOnChange: function handleImageFieldOnChange(e) {
       var _this2 = this;
 
-      var data = this.post; // console.log(data);
+      //     console.log(e.target.files[0]);
+      var file = e.target.files[0]; //Target file at index 0
+      //Check size
 
+      if (file['size'] < 2111775) {
+        //2MB
+        //Convert to base64
+        var reader = new FileReader();
+
+        reader.onloadend = function (file) {
+          // console.log('RESULT', reader.result);
+          _this2.post.image = reader.result;
+        };
+
+        reader.readAsDataURL(file); // this.post.image = file;
+        // console.log(this.post.image);
+      } else {
+        this.$toastr.e('File size exceeded', "Error");
+      }
+    },
+    //Create
+    createPost: function createPost() {
+      var _this3 = this;
+
+      var data = this.post;
+      console.log(data);
       axios.post('/api/posts', data).then(function (response) {
         console.log(response); //Clear form
 
-        _this2.post = {
+        _this3.post = {
           category: '',
           title: '',
           description: '',
           image: ''
         }; //Redirect
 
-        _this2.$router.push({
+        _this3.$router.push({
           name: 'posts'
         }); //Show                    
 
 
-        _this2.$toastr.s("" + response.data.message, "Success");
+        _this3.$toastr.s("" + response.data.message, "Success");
       })["catch"](function (error) {
-        var toastr = _this2.$toastr;
+        var toastr = _this3.$toastr;
         Object.values(error.response.data.errors).forEach(function (value) {
           // alert(value[0]); 
           toastr.e(value[0], "Error");
@@ -2126,30 +2150,54 @@ __webpack_require__.r(__webpack_exports__);
   },
   //Method
   methods: {
+    //Upload Image
+    handleImageFieldOnChange: function handleImageFieldOnChange(e) {
+      var _this2 = this;
+
+      //     console.log(e.target.files[0]);
+      var file = e.target.files[0]; //Target file at index 0
+      //Check size
+
+      if (file['size'] < 2111775) {
+        //2MB
+        //Convert to base64
+        var reader = new FileReader();
+
+        reader.onloadend = function (file) {
+          // console.log('RESULT', reader.result);
+          _this2.post.image = reader.result;
+        };
+
+        reader.readAsDataURL(file); // this.post.image = file;
+        // console.log(this.post.image);
+      } else {
+        this.$toastr.e('File size exceeded', "Error");
+      }
+    },
     //Create
     updatePost: function updatePost(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       var data = this.post; // console.log(data);
 
       axios.put('/api/posts/' + id, data).then(function (response) {
         // console.log(response);
         //Clear form
-        _this2.post = {
+        _this3.post = {
           category: '',
           title: '',
           description: '',
           image: ''
         }; //Redirect
 
-        _this2.$router.push({
+        _this3.$router.push({
           name: 'posts'
         }); //Show                    
 
 
-        _this2.$toastr.i("" + response.data.message, "Info");
+        _this3.$toastr.i("" + response.data.message, "Info");
       })["catch"](function (error) {
-        var toastr = _this2.$toastr;
+        var toastr = _this3.$toastr;
         Object.values(error.response.data.errors).forEach(function (value) {
           // alert(value[0]); 
           toastr.e(value[0], "Error");
@@ -2220,6 +2268,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Data
   data: function data() {
@@ -2229,7 +2283,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, "user", {
       name: '',
       email: '',
-      type: ''
+      type: '',
+      password: ''
     });
   },
   //Created
@@ -2256,7 +2311,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.user = {
           name: '',
           email: '',
-          type: ''
+          type: '',
+          password: ''
         }; //Redirect to users
 
         _this2.$router.push({
@@ -2335,6 +2391,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Data
   data: function data() {
@@ -2343,7 +2405,8 @@ __webpack_require__.r(__webpack_exports__);
       user: {
         name: '',
         email: '',
-        type: ''
+        type: '',
+        password: ''
       }
     };
   },
@@ -2378,7 +2441,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.user = {
           name: '',
           email: '',
-          type: ''
+          type: '',
+          password: ''
         }; //Redirect to users
 
         _this2.$router.push({
@@ -63358,7 +63422,24 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-form-label", attrs: { for: "image" } },
+                    [_vm._v("Image:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control-file",
+                    attrs: {
+                      id: "image",
+                      type: "file",
+                      name: "image",
+                      autocomplete: "image"
+                    },
+                    on: { change: _vm.handleImageFieldOnChange }
+                  })
+                ]),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -63390,26 +63471,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("Create Post")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "col-form-label", attrs: { for: "image" } }, [
-        _vm._v("Image:")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control-file",
-        attrs: {
-          id: "image",
-          type: "file",
-          name: "image",
-          autocomplete: "image"
-        }
-      })
     ])
   }
 ]
@@ -63618,7 +63679,24 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-form-label", attrs: { for: "image" } },
+                    [_vm._v("Image:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control-file",
+                    attrs: {
+                      id: "image",
+                      type: "file",
+                      name: "image",
+                      autocomplete: "image"
+                    },
+                    on: { change: _vm.handleImageFieldOnChange }
+                  })
+                ]),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -63650,26 +63728,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("Create Post")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "col-form-label", attrs: { for: "image" } }, [
-        _vm._v("Image:")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control-file",
-        attrs: {
-          id: "image",
-          type: "file",
-          name: "image",
-          autocomplete: "image"
-        }
-      })
     ])
   }
 ]
@@ -63875,6 +63933,46 @@ var render = function() {
                     ],
                     2
                   )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label required",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Password:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.password,
+                        expression: "user.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      name: "password",
+                      autocomplete: "password",
+                      autofocus: "",
+                      required: ""
+                    },
+                    domProps: { value: _vm.user.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "password", $event.target.value)
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c(
@@ -64112,6 +64210,46 @@ var render = function() {
                     ],
                     2
                   )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label required",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Password:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.password,
+                        expression: "user.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      name: "password",
+                      autocomplete: "password",
+                      autofocus: "",
+                      required: ""
+                    },
+                    domProps: { value: _vm.user.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "password", $event.target.value)
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c(
@@ -64401,7 +64539,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "table-responsive p-0" }, [
-              _c("table", { staticClass: "table table-striped text-nowrap" }, [
+              _c("table", { staticClass: "table table-striped" }, [
                 _vm._m(0),
                 _vm._v(" "),
                 _c(
@@ -64418,7 +64556,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(post.description))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(post.image))]),
+                      _c("td", [
+                        _c("img", {
+                          attrs: {
+                            src: "storage/blog_images/" + post.image,
+                            alt: "Image",
+                            title: "View"
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(_vm._s(_vm._f("myDate")(post.created_at)))
@@ -64426,6 +64572,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "td",
+                        { staticClass: "text-nowrap" },
                         [
                           _c(
                             "router-link",

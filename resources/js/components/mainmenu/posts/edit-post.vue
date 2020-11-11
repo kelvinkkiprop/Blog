@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="image" class="col-form-label">Image:</label>
                                 <input id="image" type="file" class="form-control-file" name="image"
-                                autocomplete="image">
+                                autocomplete="image" @change="handleImageFieldOnChange">
                             </div> 
 
                             <!-- Buttons --> 
@@ -93,6 +93,28 @@
 
         //Method
         methods: {
+
+            //Upload Image
+            handleImageFieldOnChange(e){
+            //     console.log(e.target.files[0]);
+                var file = e.target.files[0];//Target file at index 0
+
+                //Check size
+                if(file['size'] < 2111775){//2MB
+                    //Convert to base64
+                    var reader = new FileReader();
+                    reader.onloadend = (file) =>{
+                        // console.log('RESULT', reader.result);
+                        this.post.image = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                    // this.post.image = file;
+                    // console.log(this.post.image);
+                }else{
+                   this.$toastr.e('File size exceeded', "Error");  
+                }
+
+            },
 
             //Create
             updatePost(id){

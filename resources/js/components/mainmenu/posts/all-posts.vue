@@ -18,7 +18,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive p-0">
-                            <table class="table table-striped text-nowrap">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -36,9 +36,9 @@
                                          <td>{{ post.post_category.name }}</td>
                                         <td>{{ post.title | capitalize }}</td>
                                         <td>{{ post.description }}</td>
-                                        <td>{{ post.image }}</td>
+                                        <td><img :src="'storage/blog_images/'+post.image" alt="Image" title="View"/></td>
                                         <td>{{post.created_at | myDate }}</td>
-                                        <td>
+                                        <td class="text-nowrap">
                                             <router-link :to="'/edit-post/' + post.id" class="btn btn-dark btn-sm">
                                                 <i class="fas fa-edit" aria-hidden="true"></i>
                                             </router-link>
