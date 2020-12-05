@@ -48266,6 +48266,85 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+/*--------------------------------------APP------------------------------------------*/
+
+#app {
+  min-height: calc(100vh - 10vh);
+  background-color: #f8fafc;
+}
+
+#app .navbar {
+  background-color: #38c172 !important;
+  border-top: #f6993f 2px solid;
+  box-shadow: 0 2px 5px 0 rgba(112, 112, 112, 0.16), 0 2px 10px 0 rgba(112, 112, 112, 0.12);
+}
+
+#app .navbar .navbar-nav > li > a,
+#app .navbar .navbar-nav > li > a {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#app .navbar .navbar-nav > li > a:hover,
+#app .navbar .navbar-nav > li > a:focus {
+  background-color: #f6993f;
+  border-color: #f6993f;
+  color: #ffffff;
+  transition: all 0.1s ease 0.1s;
+}
+
+#app .navbar .navbar-nav > li > label {
+  color: #ffffff;
+}
+
+#app .navbar .navbar-brand {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#app .btn-success {
+  background-color: #38c172;
+  border-color: #38c172;
+}
+
+#app .btn-success:hover {
+  background-color: #ffffff;
+  border-color: #38c172;
+  color: #38c172;
+}
+
+#app .btn-link {
+  color: #f6993f;
+}
+
+#app .btn-link:hover {
+  color: #38c172;
+  text-decoration: none;
+}
+
+.pagination .page-link {
+  color: #38c172;
+}
+
+.pagination a {
+  color: #38c172;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #38c172;
+  border-color: #38c172;
+}
+
+.pagination .page-item.active .page-link {
+  z-index: 3;
+  color: #ffffff;
+  background-color: #38c172;
+  border-color: #38c172;
+}
+
+/*--------------------------------------./APP------------------------------------------*/
+
 /*--------------------------------------AdminLTE------------------------------------------*/
 
 #adminLTE .main-header {

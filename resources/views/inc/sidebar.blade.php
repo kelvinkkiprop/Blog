@@ -23,6 +23,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2 sidebarmenu">
+            @if(Auth::user()->type==1)
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">MAIN NAVIGATION</li>
                 <li class="nav-item">
@@ -43,6 +44,12 @@
                       <p>Users</p>
                     </router-link>
                 </li> 
+                <li class="nav-item">
+                    <router-link to="/feedbacks" class="nav-link">
+                      <i class="nav-icon fas fa-envelope"></i>
+                      <p>Messages</p>
+                    </router-link>
+                </li> 
 
                 <li class="nav-header">APPLICATION SETTINGS</li>
                 <li class="nav-item">
@@ -55,6 +62,7 @@
                     </form>                   
                 </li>           
             </ul>
+            @endif
         </nav>
         <!-- /.Sidebar Menu -->
 

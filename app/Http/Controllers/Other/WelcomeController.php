@@ -28,7 +28,7 @@ class WelcomeController extends Controller
             return redirect()->route('dashboard');
 
         }if(Auth::user()->type == 2){//Normal
-            return redirect()->route('home');
+            return redirect()->route('home.index');
         }
     }
 

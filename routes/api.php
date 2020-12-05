@@ -62,4 +62,14 @@ Route::get('post_categories', 'Other\PostCategoryController@index');
 Route::resource('posts', 'MainMenu\PostController');
 
 
+/*
+|--------------------------------------------------------------------------
+| Feedbacks Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::resource('feedbacks', 'MainMenu\FeedbackController');
+
+
+
 

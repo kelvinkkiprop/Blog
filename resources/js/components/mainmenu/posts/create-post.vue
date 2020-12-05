@@ -46,7 +46,7 @@
 
                             <!-- Buttons --> 
                             <button type="submit" class="btn btn-success">Save</button>
-                            <router-link to="/users" class="btn btn-outline-warning">Cancel</router-link>
+                            <router-link to="/posts" class="btn btn-outline-warning">Cancel</router-link>
 
                         </form>
                     </div>

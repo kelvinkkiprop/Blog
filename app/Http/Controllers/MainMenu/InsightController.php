@@ -10,6 +10,20 @@ use App\Other\PostCategory;
 
 class InsightController extends Controller
 {
+
+        
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {         
+        $this->middleware('adminsonly'); 
+        $this->middleware('api');     
+    }
+
+
     /**
      * Display insights
      */

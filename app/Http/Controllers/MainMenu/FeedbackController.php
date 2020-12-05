@@ -5,13 +5,11 @@ namespace App\Http\Controllers\MainMenu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Add
-use Illuminate\Support\Facades\Hash;
-use App\User;
+use App\Menu\Message;
 
-class UserController extends Controller
+class FeedbackController extends Controller
 {
-
-         
+     
     /**
      * Create a new controller instance.
      *
@@ -30,8 +28,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with(['UserType','UserStatus'])->orderBy('name', 'asc')->get();
-        return $users;
+        $feedbacks = Message::orderBy('id', 'desc')->get();
+        return $feedbacks;
     }
 
     /**
@@ -52,25 +50,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request, [  
-            'name' => 'required|string|max:255',
-            'type' => 'required|integer',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
-
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'type' => $request['type'],
-            'password' => Hash::make($request['password']),
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-        ],201);
-
+      
     }
 
     /**
@@ -81,7 +61,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -92,8 +72,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return $user;
+        $feedback = Message::find($id);
+        return $feedback;
+    
     }
 
     /**
@@ -104,26 +85,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
-        $this -> validate($request, [  
-            'name' => 'required|string|max:255',
-            'type' => 'required',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
-        ]);
-
-
-        User::where('id', $id)->update([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'type' => $request['type'],
-            'password' => Hash::make($request['password']),
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User updated successfully',
-        ],201);
+    {
 
     }
 
@@ -135,12 +97,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
+
+        $feedback = Message::find($id);
+        $feedback->delete();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'User removed successfully',
+            'message' => 'Message removed successfully',
         ],201);
+
     }
 }

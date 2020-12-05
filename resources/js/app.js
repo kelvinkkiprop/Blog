@@ -81,6 +81,11 @@ const routes = [
     { path: '/create-user', name:'create-user', component: require('./components/MainMenu/users/create-user.vue').default },
     { path: '/edit-user/:id', name:'edit-user', component: require('./components/MainMenu/users/edit-user.vue').default },
 
+    //Messages
+    { path: '/feedbacks', name:'feedbacks', component: require('./components/mainmenu/messages/all-messages.vue').default },
+    { path: '/show-feedback/:id', name:'show-feedback', component: require('./components/mainmenu/messages/show-message.vue').default },
+ 
+    
   ]
 
   
