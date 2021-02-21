@@ -8,21 +8,21 @@
                 <div class="card-header">{{ $post->title }}</div>
 
                 <div class="card-body">
-                        
+
                     @if($post->image!=null)
                         <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
                     @else
-                        <img class="card-img-top1" src="/images/no_image_avail.png" height="120" alt="No image">                                        
+                        <img class="card-img-top1" src="/images/no_image_avail.png" height="120" alt="No image">
                     @endif
                     <h6 class="card-title1"><strong><a href="{{ route ('home.show', $post->id) }}">{{$post->title}}</a></strong></h6>
                     <span class="text-muted mt-1 mb-1"><strong>{{Carbon\Carbon::parse($post->created_at)->format('d M, Y')}}</strong></span>
                     <h6 class="card-subtitle mt-1 mb-1"><span class="badge badge-pill badge-warning">@isset($post->PostCategory){{$post->PostCategory->name}}@endisset</span></h6>
-                    <p class="card-text">{{ $post->description }}</p>
-  
+                    <p class="card-text">{!! $post->description !!}</p>
+
                     <form action="{{ route('home.update', $post->id) }}" method="POST">
-                        @csrf 
-                                              
-                        <!-- Conversations-->                        
+                        @csrf
+
+                        <!-- Conversations-->
                         <div class="form-group">
                             @isset($post->PostComments)
                                 @foreach ($post->PostComments as $comment)
@@ -66,13 +66,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endif                                            
-                                @endforeach                                        
+                                @endif
+                                @endforeach
                             @endisset
-                        </div> 
-                             
-                        @if(Auth::user())                            
-                            <!-- Message -->                                                     
+                        </div>
+
+                        @if(Auth::user())
+                            <!-- Message -->
                             <div class="form-group mt-2">
                                 <label for="comment"><strong>{{ __('Comment:') }}</strong></label>
                                 <textarea id="comment" type="text" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment"
@@ -82,11 +82,11 @@
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
                                 @endif
-                            </div>   
-                            <button type="submit" class="pull-left btn btn-success">Send</button>      
-                        @endif            
+                            </div>
+                            <button type="submit" class="pull-left btn btn-success">Send</button>
+                        @endif
                         <a href="{{ route('home.index') }}" class="btn btn-outline-warning">@method('PUT')Cancel<a>
-                    </form>  
+                    </form>
                 </div>
             </div>
         </div>
