@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-     
+
     /**
      * Create a new controller instance.
      *
@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('api');        
+        $this->middleware('api');
     }
 
 
@@ -55,7 +55,7 @@ class PostController extends Controller
     {
         // return $request->all();
 
-        $this -> validate($request, [  
+        $this -> validate($request, [
             'category' => 'required|integer',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -63,16 +63,16 @@ class PostController extends Controller
         ]);
 
         $filename = '';
-        $image = $request->input('image');  //As Base64 String 
+        $image = $request->input('image');  //As Base64 String
         if($image){//Has photo
             $filename   = time().'.'.explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1]; //Get extension
             // return $filename;
-            //Resize   
+            //Resize
             $img = Image::make($image);
              $img =$img->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();                 
-            });    
-            $img->stream();    
+                $constraint->aspectRatio();
+            });
+            $img->stream();
             // //Store
             Storage::disk('local')->put('public/blog_images/'.$filename, $img, 'public');
         }
@@ -125,7 +125,7 @@ class PostController extends Controller
     {
         // return $request->all();
 
-        $this -> validate($request, [  
+        $this -> validate($request, [
             'category' => 'required|integer',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -135,22 +135,22 @@ class PostController extends Controller
         //Delete old image
         $post = Post::find($id);
         $image_url = public_path("storage/blog_images/".$post->image);
-        //return $image_url;        
+        //return $image_url;
         if(File::exists($image_url)){
             File::delete($image_url);
-        } 
-        
+        }
+
         $filename = '';
-        $image = $request->input('image');  //As Base64 String 
+        $image = $request->input('image');  //As Base64 String
         if($image){//Has photo
             $filename   = time().'.'.explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1]; //Get extension
             // return $filename;
-            //Resize   
+            //Resize
             $img = Image::make($image);
              $img =$img->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();                 
-            });    
-            $img->stream();    
+                $constraint->aspectRatio();
+            });
+            $img->stream();
             // //Store
             Storage::disk('local')->put('public/blog_images/'.$filename, $img, 'public');
         }
@@ -179,10 +179,10 @@ class PostController extends Controller
         $post = Post::find($id);
             //Delete image
             $image_url = public_path("storage/blog_images/".$post->image);
-            //return $image_url;        
+            //return $image_url;
             if(File::exists($image_url)){
                 File::delete($image_url);
-            } 
+            }
         $post->delete();
 
         return response()->json([
@@ -191,4 +191,32 @@ class PostController extends Controller
         ],201);
 
     }
+
+
+
+    /**
+     * postDescriptionEditorImages
+     */
+    public function postDescriptionEditorImages(Request $request)
+    {
+
+        $filename = '';
+        $image = $request->input('image');  //As Base64 String
+        if($image){//Has photo
+            $filename   = time().'.'.explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1]; //Get extension
+            // return $filename;
+            //Resize
+            $img = Image::make($image);
+             $img =$img->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->stream();
+            // //Store
+            Storage::disk('local')->put('public/editor_images/'.$filename, $img, 'public');
+
+            // return 'public/editor_images/'.$filename;
+
+        }
+    }
+
 }

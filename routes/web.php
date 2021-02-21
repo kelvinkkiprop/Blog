@@ -90,4 +90,21 @@ Route::get('/dashboard', 'MainMenu\DashboardController@index')->name('dashboard'
 | Prevent Laravel Route Errors
 |--------------------------------------------------------------------------
 */
-Route::get('{any}', 'HomeController@index')->where("any", ".*");
+Route::get('{any}', 'Other\WelcomeController@index')->where("any", ".*");
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Commands Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/commands', function() {
+    Artisan::call('storage:link');
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('npm run watch');
+    return 'DONE'; //Return anything
+});

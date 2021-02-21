@@ -35,7 +35,7 @@
                                         <td>{{ index+1 }}</td>
                                          <td>{{ post.post_category.name }}</td>
                                         <td>{{ post.title | capitalize }}</td>
-                                        <td>{{ post.description }}</td>
+                                        <td v-html=" post.description "></td>
                                         <td><img :src="'storage/blog_images/'+post.image" alt="Image" title="View"/></td>
                                         <td>{{post.created_at | myDate }}</td>
                                         <td class="text-nowrap">
@@ -49,7 +49,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>                        
+                        </div>
                     </div>
 
                 </div>
@@ -70,13 +70,13 @@
 
         //Data
         data() {
-            return { 
+            return {
                 posts : {},
                 post: {
                     title: '',
                     description: '',
                     image: ''
-                },               
+                },
             }
         },
 
@@ -84,7 +84,7 @@
         methods: {
 
             //Load
-            loadPosts(){                            
+            loadPosts(){
                 axios.get('api/posts')
                 .then(response => {
                     this.posts = response.data;
@@ -92,7 +92,7 @@
             },
 
             //Delete Post
-            deletePost(id){               
+            deletePost(id){
                 //Show
                 Swal.fire({
                 title: 'Delete?',
@@ -102,20 +102,20 @@
                 confirmButtonColor: '#7BB32D',
                 cancelButtonColor: '#881F1C',
                 confirmButtonText: 'Yes'
-                }).then((result) => {      
-                    if (result.isConfirmed) {   
-                        //Delete  
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //Delete
                         axios.delete('/api/posts/'+id).then((response)=>{
-                            // console.log(response);  
-                            //Show                    
+                            // console.log(response);
+                            //Show
                             this.$toastr.e(""+response.data.message, "Success");
                             //Call
                             this.loadPosts();
                         });
                     }
                 }).catch(error => {
-                    var toastr = this.$toastr;                   
-                    toastr.e('Failed to delete post', "Error");                    
+                    var toastr = this.$toastr;
+                    toastr.e('Failed to delete post', "Error");
                 })
             }
 

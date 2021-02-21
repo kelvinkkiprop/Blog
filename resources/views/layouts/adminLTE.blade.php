@@ -39,7 +39,7 @@
                 </form>
 
                 <!-- Right navbar links -->
-                <ul class="navbar-nav ml-auto"> 
+                <ul class="navbar-nav ml-auto">
                     <!-- Right Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -51,12 +51,12 @@
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a href="/home" class="dropdown-item">
                                 <i class="fas fa-home fa-fw" aria-hidden="true"></i>Home</a>
-                            </a>                            
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
-                            </form>                            
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -71,18 +71,12 @@
             <!-----------------------------------------ContentWrapper--------------------------------------------------->
             <div class="content-wrapper">
                 <div class="content-header">
-                    <div class="container-fluid">
-
-                        <main class="py-4">
-                            <!-- Render route component -->
-                            <router-view></router-view>
-                        </main>
-                        
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <main class="py-4">
+                                <!-- Render route component -->
+                                <router-view></router-view>
+                            </main>
                         </div>
                     </div>
                 </div>
@@ -91,7 +85,7 @@
 
         </section>
         <!-----------------------------------------./AdminLTE--------------------------------------------------->
-   
+
         <!-----------------------------------------Footer--------------------------------------------------->
         <footer class="main-footer">
             <strong class="pull-center">&copy;&nbsp;{{date('Y')}}&nbsp;{{config('app.name', 'Blog')}}.</strong>

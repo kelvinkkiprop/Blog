@@ -62,6 +62,10 @@
                     </form>                   
                 </li>           
             </ul>
+            @else 
+                <script type="text/javascript">
+                    window.location = "{{ url('/home') }}";//here double curly bracket
+                </script>
             @endif
         </nav>
         <!-- /.Sidebar Menu -->

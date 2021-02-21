@@ -19,7 +19,6 @@ class InsightController extends Controller
      */
     public function __construct()
     {         
-        $this->middleware('adminsonly'); 
         $this->middleware('api');     
     }
 

@@ -3,48 +3,55 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">                        
+                    <div class="card-header">
                         <h3 class="card-title">Create Post</h3>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" @submit.prevent="createPost">  
+                        <form method="POST" enctype="multipart/form-data" @submit.prevent="createPost">
 
-                            <!-- Category  -->                        
+                            <!-- Category  -->
                             <div class="form-group">
                                 <label for="category" class="col-form-label required">Category:</label>
-                                <select id="category" type="text" class="form-control" name="category" 
+                                <select id="category" type="text" class="form-control" name="category"
                                 v-model="post.category" autocomplete="category" autofocus required>
                                     <option value="0" disabled="true" selected="true">--- Select Category ---</option>
                                     <option v-for="category in categories" :value="category.id" :key="category.id">
                                         {{ category.name }}
                                     </option>
                                 </select>
-                            </div>  
+                            </div>
 
-                            <!-- Title  -->                           
+                            <!-- Title  -->
                             <div class="form-group">
                                 <label for="title" class="col-form-label required">Title:</label>
                                 <input id="title" type="title" class="form-control" name="name"
                                 v-model="post.title" autocomplete="title" autofocus required>
-                            </div> 
+                            </div>
 
                             <!-- Description  -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="description" class="col-form-label required">Description:</label>
                                 <textarea id="description" type="text" class="form-control" name="description"
                                 v-model="post.description" autocomplete="description" autofocus required
                                 rows="3"></textarea>
-                            </div> 
+                            </div> -->
+
+                            <!-- Description  -->
+                            <div class="form-group">
+                                <label for="description" class="col-form-label required">Description:</label>
+                                <vue-editor id="description" v-model="post.description"
+                                useCustomImageHandler @image-added="handleImageAdded"></vue-editor>
+                            </div>
 
                             <!-- Image  -->
                             <div class="form-group">
                                 <label for="image" class="col-form-label">Image:</label>
                                 <input id="image" type="file" class="form-control-file" name="image"
                                 autocomplete="image" @change="handleImageFieldOnChange">
-                            </div> 
+                            </div>
 
-                            <!-- Buttons --> 
+                            <!-- Buttons -->
                             <button type="submit" class="btn btn-success">Save</button>
                             <router-link to="/posts" class="btn btn-outline-warning">Cancel</router-link>
 
@@ -58,18 +65,18 @@
 
 
 <script>
-    
+
     export default {
         //Data
         data() {
-            return { 
-                categories: [], 
+            return {
+                categories: [],
                 post: {
                     category: '',
                     title: '',
                     description: '',
                     image: ''
-                },            
+                },
             }
         },
 
@@ -83,6 +90,30 @@
 
         //Method
         methods: {
+             //Handle Image Added on Vue Editor Image
+            handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
+                // An example of using FormData
+                // NOTE: Your key could be different such as:
+                // formData.append('file', file)
+
+                var formData = new FormData();
+                formData.append("image", file);
+
+                axios({
+                    url: "/api/description-editor-images",
+                    method: "POST",
+                    data: formData
+                })
+                .then(result => {
+                let url = result.data.url; // Get url from response
+                Editor.insertEmbed(cursorLocation, "image", url);
+                resetUploader();
+                })
+                .catch(err => {
+                console.log(err);
+                });
+            },
+
 
             //Upload Image
             handleImageFieldOnChange(e){
@@ -101,7 +132,7 @@
                     // this.post.image = file;
                     // console.log(this.post.image);
                 }else{
-                   this.$toastr.e('File size exceeded', "Error");  
+                   this.$toastr.e('File size exceeded', "Error");
                 }
 
             },
@@ -120,24 +151,24 @@
                         title: '',
                         description: '',
                         image: ''
-                    }   
+                    }
 
                     //Redirect
                     this.$router.push({ name: 'posts' })
 
-                    //Show                    
+                    //Show
                     this.$toastr.s(""+response.data.message, "Success");
 
                 }).catch(error => {
                     var toastr = this.$toastr;
                     Object.values(error.response.data.errors).forEach(function(value) {
-                        // alert(value[0]); 
+                        // alert(value[0]);
                         toastr.e(value[0], "Error");
                     });
-                    
+
                 })
             },
-         
+
 
         }
 

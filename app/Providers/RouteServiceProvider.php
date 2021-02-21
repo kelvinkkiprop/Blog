@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
     */
     public const WELCOME = '/welcome';
 
-    
+
 
     /**
      * Define your route model bindings, pattern filters, etc.

@@ -30,7 +30,7 @@
                             <strong><li>Advertising Services</li></strong>
                             <p>I can advertise your product or service here, as long as it is about online work or online business. I will 
                             help you reach thousands of readers on my mailing lists, blog, social profiles, pages and groups. Contact me for a quote.</p>                                    
-                            <p>You can reach me anytime via email (maxwel@blog.com), WhatsApp, text (+254725734000), Facebook, or by quickly filling in the contact form</p>
+                            <p>You can reach me anytime via email (maxwel@blog.com), WhatsApp, text (+254727649647), Facebook, or by quickly filling in the contact form</p>
 
                         </ol>                 
 

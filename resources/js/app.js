@@ -38,6 +38,14 @@ Vue.use(VueToastr)
 import swal from 'sweetalert2';
 window.Swal = swal
 
+
+/**
+ * Import VueEditor
+ */
+import VueEditor from "vue2-editor";
+Vue.use(VueEditor)
+
+
 /**
 * Vue Global Filter to Format Date
 */
@@ -60,7 +68,7 @@ Vue.filter('capitalize', function (value) {
  * Register your Vue components.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
 
@@ -84,11 +92,11 @@ const routes = [
     //Messages
     { path: '/feedbacks', name:'feedbacks', component: require('./components/mainmenu/messages/all-messages.vue').default },
     { path: '/show-feedback/:id', name:'show-feedback', component: require('./components/mainmenu/messages/show-message.vue').default },
- 
-    
+
+
   ]
 
-  
+
 /**
  * Create the router instance and pass the `routes` option
  */

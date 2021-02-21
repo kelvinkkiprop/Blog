@@ -7,6 +7,7 @@ composer require laravel/ui
 php artisan ui vue
 php artisan ui vue --auth
 npm install
+npm install && npm run dev
 
 3. Migrations
 php artisan make:model Other/UserStatus -m
@@ -36,7 +37,7 @@ php artisan make:middleware AdminsOnly
 npm install vue-router --save
 
 2. Installing Vue Toastr
-npm install --save vue-toastr 
+npm install --save vue-toastr
 
 3. Installing Axios
 npm install axios --save
@@ -47,10 +48,13 @@ npm install moment --save
 5. Installing sweetalert
 npm install sweetalert --save
 
+6.  Rich-Text vue2-Editor
+npm install vue2-editor --save
+
 
 <!--------------------AdminLTE------------------>
 1. Installation
-npm install admin-lte@v3.0.5 --save 
+npm install admin-lte@v3.0.5 --save
 2. Usage
 Add to below app.scss
 @import '~admin-lte/dist/css/adminlte.css';

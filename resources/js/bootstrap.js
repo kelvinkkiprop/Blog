@@ -11,6 +11,10 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    //Add to solve Sidebar menu not working in Laravel+vue+adminlte
+    require('admin-lte');
+
 } catch (e) {}
 
 /**

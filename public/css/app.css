@@ -31253,7 +31253,7 @@ a.text-muted:hover {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Roboto", "Nunito", sans-serif;
+  --font-family-sans-serif: "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -31285,7 +31285,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Roboto", "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -37593,7 +37593,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Roboto", "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -37718,7 +37718,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Roboto", "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -48350,6 +48350,10 @@ readers do not read off random characters that represent icons */
 #adminLTE .main-header {
   background: #38c172;
   border-top: 2px solid #ffed4a;
+}
+
+#adminLTE .main-header a {
+  color: #000000 !important;
 }
 
 #adminLTE .main-sidebar .router-link-exact-active {
