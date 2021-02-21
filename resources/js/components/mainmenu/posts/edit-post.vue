@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Create Post</h3>
+                        <h3 class="card-title">Edit Post</h3>
                     </div>
 
                     <div class="card-body">
@@ -103,7 +103,7 @@
         //Method
         methods: {
 
-                         //Handle Image Added on Vue Editor Image
+            //Handle Image Added on Vue Editor Image
             handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
                 // An example of using FormData
                 // NOTE: Your key could be different such as:

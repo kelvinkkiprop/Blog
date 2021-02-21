@@ -30,6 +30,16 @@ Route::get('insights', 'MainMenu\InsightController@index');
 Route::resource('posts', 'MainMenu\PostController');
 Route::post('description-editor-images', 'MainMenu\PostController@postDescriptionEditorImages');
 
+
+/*
+|--------------------------------------------------------------------------
+| Information Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::resource('information', 'MainMenu\InformationController');
+
+
 /*
 |--------------------------------------------------------------------------
 | Users Routes

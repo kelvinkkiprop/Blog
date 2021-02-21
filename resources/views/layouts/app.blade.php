@@ -36,7 +36,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto"></ul>
+
+                    <!-- Center Links -->
+                    <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home.index') }}">{{ __('Home') }}</a>
                         </li>
@@ -44,7 +47,7 @@
                             <a class="nav-link" href="{{ url('/about') }}">{{ __('About') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/services') }}">{{ __('Our Services') }}</a>
+                            <a class="nav-link" href="{{ url('/services') }}">{{ __('Services') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/contact') }}">{{ __('Contact') }}</a>
@@ -70,9 +73,9 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                     
+
                                     <a class="dropdown-item" href="{{ route('welcome') }}">{{ __('Explore') }}</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -83,7 +86,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                   
+
                                 </div>
                             </li>
                         @endguest
@@ -101,13 +104,13 @@
             @yield('content')
         </main>
          <!-----------------------------------------./Main--------------------------------------------------->
-        
+
     </div>
 
     <!-----------------------------------------Footer--------------------------------------------------->
     @include('inc.footer')
     <!-----------------------------------------./Footer--------------------------------------------------->
-        
-            
+
+
 </body>
 </html>

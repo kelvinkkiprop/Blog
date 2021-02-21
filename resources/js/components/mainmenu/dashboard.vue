@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">                        
+                    <div class="card-header">
                         <h3 class="card-title">System Insights</h3>
                     </div>
 
@@ -29,7 +29,7 @@
                                         <p>Posts</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-list"></i>
+                                        <i class="ion ion-pie-graph"></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info</a>
                                 </div>
@@ -49,11 +49,11 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                    <h3>{{ visits }}</h3>
-                                    <p>Visits</p>
+                                    <h3>{{ messages }}</h3>
+                                    <p>Messages</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
+                                        <i class="ion ion-android-list"></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info</a>
                                 </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">                        
+                    <div class="card-header">
                         <h3 class="card-title">Recent Users</h3>
                     </div>
                     <div class="card-body">
@@ -85,7 +85,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
 
@@ -98,25 +98,25 @@
     export default {
         //Data
         data() {
-            return { 
+            return {
                 post_categories: '',
-                posts : '', 
-                users : '', 
-                visits : '',
-                latest_users : {},              
+                posts : '',
+                users : '',
+                messages : '',
+                latest_users : {},
             }
         },
 
         //Methods
         methods: {
             //Load
-            loadInsights(){                            
+            loadInsights(){
                 axios.get('api/insights')
                 .then(response => {
                     this.post_categories = response.data.post_categories_count;
                     this.posts = response.data.posts_count;
                     this.users = response.data.users_count;
-                    this.visits = response.data.visits_count;
+                    this.messages = response.data.messages_count;
                     this.latest_users = response.data.recent_users;
                 });
             },

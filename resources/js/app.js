@@ -84,15 +84,21 @@ const routes = [
     { path: '/create-post', name:'create-post',component: require('./components/MainMenu/posts/create-post.vue').default },
     { path: '/edit-post/:id', name:'edit-post', component: require('./components/MainMenu/posts/edit-post.vue').default },
 
+    //Messages
+    { path: '/feedbacks', name:'feedbacks', component: require('./components/mainmenu/messages/all-messages.vue').default },
+    { path: '/show-feedback/:id', name:'show-feedback', component: require('./components/mainmenu/messages/show-message.vue').default },
+
     //Users
     { path: '/users', name:'users', component: require('./components/mainmenu/users/all-users.vue').default },
     { path: '/create-user', name:'create-user', component: require('./components/MainMenu/users/create-user.vue').default },
     { path: '/edit-user/:id', name:'edit-user', component: require('./components/MainMenu/users/edit-user.vue').default },
 
-    //Messages
-    { path: '/feedbacks', name:'feedbacks', component: require('./components/mainmenu/messages/all-messages.vue').default },
-    { path: '/show-feedback/:id', name:'show-feedback', component: require('./components/mainmenu/messages/show-message.vue').default },
-
+    //Information
+    { path: '/about-admin', name:'about-admin', component: require('./components/information/about.vue').default },
+    { path: '/create-info', name:'create-info', component: require('./components/information/create-info.vue').default },
+    { path: '/edit-info/:id', name:'edit-user', component: require('./components/information/edit-info.vue').default },
+    { path: '/services-admin', name:'about-admin', component: require('./components/information/services.vue').default },
+    { path: '/contact-admin', name:'about-admin', component: require('./components/information/contact.vue').default },
 
   ]
 

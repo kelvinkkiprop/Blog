@@ -31,27 +31,54 @@
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>Dashboard</p>
                     </router-link>
-                </li> 
+                </li>
                 <li class="nav-item">
                     <router-link to="/posts" class="nav-link">
                       <i class="nav-icon fas fa-blog"></i>
                       <p>Posts</p>
                     </router-link>
-                </li> 
-                <li class="nav-item">
-                    <router-link to="/users" class="nav-link">
-                      <i class="nav-icon fas fa-users"></i>
-                      <p>Users</p>
-                    </router-link>
-                </li> 
+                </li>
                 <li class="nav-item">
                     <router-link to="/feedbacks" class="nav-link">
                       <i class="nav-icon fas fa-envelope"></i>
                       <p>Messages</p>
                     </router-link>
-                </li> 
+                </li>
+                <li class="nav-item">
+                    <router-link to="/users" class="nav-link">
+                      <i class="nav-icon fas fa-users"></i>
+                      <p>Users</p>
+                    </router-link>
+                </li>
 
                 <li class="nav-header">APPLICATION SETTINGS</li>
+                <li class="{{Request::path() == 'about-admin' || Request::path() == 'services-admin' || Request::path() == 'contact-admin'
+                ? 'nav-item has-treeview menu-open' : 'nav-item has-treeview'}}">
+                   <a href="#" class="nav-link">
+                       <i class="nav-icon fa fa-info-circle"></i>
+                       <p>Information&nbsp;<i class="right fas fa-angle-left"></i></p>
+                   </a>
+                   <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                        <router-link to="/about-admin" class="{{Request::path() == 'about-admin' ? 'nav-link active' : 'nav-link'}}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>About</p>
+                        </router-link>
+                     </li>
+                     <li class="nav-item">
+                        <router-link to="/services-admin" class="{{Request::path() == 'services-admin' ? 'nav-link active' : 'nav-link'}}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Services</p>
+                        </router-link>
+                     </li>
+                     <li class="nav-item">
+                        <router-link to="/contact-admin" class="{{Request::path() == 'contact-admin' ? 'nav-link active' : 'nav-link'}}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Contact</p>
+                        </router-link>
+                     </li>
+                   </ul>
+               </li>
                 <li class="nav-item">
                   <a href="{{ route('logout') }}" class="nav-link"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -59,10 +86,10 @@
                     <p>Logout</p></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
-                    </form>                   
-                </li>           
+                    </form>
+                </li>
             </ul>
-            @else 
+            @else
                 <script type="text/javascript">
                     window.location = "{{ url('/home') }}";//here double curly bracket
                 </script>
@@ -72,6 +99,6 @@
 
     </div>
     <!-- /.Sidebar -->
-    
+
 </aside>
 <!-- ./Main Sidebar Container -->

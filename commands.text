@@ -14,6 +14,7 @@ php artisan make:model Other/UserStatus -m
 php artisan make:model Other/PostCategory -m
 php artisan make:model Menu/Post -m
 php artisan make:model Menu/Message -m
+php artisan make:model Menu/Information -m
 
 4. Seeders
 php artisan make:seeder UserStatusSeeder
@@ -23,6 +24,7 @@ php artisan make:seeder PostCategorySeeder
 php artisan make:controller MainMenu/WelcomeController
 php artisan make:controller MainMenu/PostController -r
 php artisan make:controller MainMenu/MessageController -r
+php artisan make:controller MainMenu/InformationController -r
 
 6. API Controllers
 php artisan make:controller MainMenu/UserController -r

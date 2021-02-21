@@ -27,19 +27,11 @@ Route::resource('home', 'HomeController');
 | About Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/about', 'HomeController@about')->name('about');
 
-Route::get('/about', function () {
-    return view('others.about');
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Contact Routes
-|--------------------------------------------------------------------------
-*/
-
-
+// Route::get('/about', function () {
+//     return view('others.about');
+// });
 
 
 /*
@@ -49,6 +41,8 @@ Route::get('/about', function () {
 */
 
 Route::resource('contact', 'MainMenu\MessageController');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +50,7 @@ Route::resource('contact', 'MainMenu\MessageController');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/services', function () {
-    return view('others.services');
-});
+Route::get('/services', 'HomeController@services')->name('services');
 
 
 /*

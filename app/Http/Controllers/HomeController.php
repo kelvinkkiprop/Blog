@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu\Information;
 use Illuminate\Http\Request;
 //Add
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class HomeController extends Controller
     {
         // $this->middleware('auth');
     }
- 
+
     /**
      * Display a listing of the resource.
      *
@@ -28,11 +29,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->paginate(10);        
+        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->paginate(10);
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 
-        // return $posts; 
+        // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
@@ -58,23 +59,23 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request, [  
+        $this -> validate($request, [
             'search_term' => 'required|string|max:255',
         ]);
 
         $search_term = $request->input('search_term');
         // return $search_term;
-            
+
         $posts = Post::where(function($query) use($search_term){
             $query->where('title','LIKE','%'.$search_term.'%')
             ->orWhere('description','LIKE','%'.$search_term.'%')
-            ->orWhere('created_at','LIKE','%'.$search_term.'%');            
-        })->orderBy('id', 'desc')->paginate(10); 
+            ->orWhere('created_at','LIKE','%'.$search_term.'%');
+        })->orderBy('id', 'desc')->paginate(10);
 
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 
-        // return $posts; 
+        // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
@@ -93,8 +94,8 @@ class HomeController extends Controller
     public function show($id)
     {
         //Post
-        $post = Post::with(['PostCategory', 'PostComments'])->find($id); 
-        // return $post; 
+        $post = Post::with(['PostCategory', 'PostComments'])->find($id);
+        // return $post;
         return view('posts.show-post')->with('post', $post);
 
     }
@@ -109,13 +110,13 @@ class HomeController extends Controller
     {
          //Filter by category
          $posts = Post::where(function($query) use($id){
-            $query->where('category', $id);           
-        })->orderBy('id', 'desc')->paginate(10); 
+            $query->where('category', $id);
+        })->orderBy('id', 'desc')->paginate(10);
 
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 
-        // return $posts; 
+        // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
@@ -131,9 +132,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {
 
-        $this -> validate($request, [  
+        $this -> validate($request, [
             'comment' => 'required|string|max:255',
         ]);
 
@@ -143,7 +144,7 @@ class HomeController extends Controller
         $post_comment->comment = $request->input('comment');
         // return $post_comment;
         $post_comment->save();
-    
+
         return redirect()->back()->with('info', 'Comment added successfully!');
 
     }
@@ -156,7 +157,44 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-  
+
     }
+
+
+    /**
+     * About
+     */
+    public function about()
+    {
+        $about = Information::where('title', 'About')->first();
+        return view('others.about')->with([
+            'about' => $about
+        ]);
+    }
+
+
+    /**
+     * Contact
+     */
+    public function contact()
+    {
+        $contact = Information::where('title', 'Contact')->first();
+        return view('others.contact')->with([
+            'contact' => $contact
+        ]);
+    }
+
+
+    /**
+     * Services
+     */
+    public function services()
+    {
+        $services = Information::where('title', 'Services')->first();
+        return view('others.services')->with([
+            'services' => $services
+        ]);
+    }
+
 
 }
