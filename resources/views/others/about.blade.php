@@ -9,7 +9,11 @@
 
                     <div class="card-body">
 
-                        <p class="card-text">{!! $about->description !!}</p>
+                        @isset($about)
+                            <p class="card-text">{!! $about->description !!}</p>
+                        @else
+                            <p class="text-muted text-center p-5">No information</p>
+                        @endisset
 
                         {{-- <p>Hello Kenya!</p>
 
