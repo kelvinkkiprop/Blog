@@ -10,7 +10,8 @@
                 <div class="card-body">
 
                     @if($post->image!=null)
-                        <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
+                        <img class="card-img-top1" src="/storage/app/public/blog_images/{{$post->image}}" alt="Image">
+                        {{-- <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image"> --}}
                     @else
                         <img class="card-img-top1" src="/images/no_image_avail.png" height="120" alt="No image">
                     @endif

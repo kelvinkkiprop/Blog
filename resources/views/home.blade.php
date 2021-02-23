@@ -18,7 +18,8 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         @if($post->image!=null)
-                                            <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
+                                            <img class="card-img-top1" src="/storage/app/public/blog_images/{{$post->image}}" alt="Image">
+                                            {{-- <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image"> --}}
                                         @else
                                             <img class="card-img-top1" src="/images/no_image_avail.png" height="120" alt="No image">
                                         @endif
@@ -28,6 +29,10 @@
                                         <span class="text-muted mt-1 mb-1"><strong>{{Carbon\Carbon::parse($post->created_at)->format('d M, Y')}}</strong></span>
                                         <h6 class="card-subtitle mt-1 mb-1"><span class="badge badge-pill badge-warning">@isset($post->PostCategory){{$post->PostCategory->name}}@endisset</span></h6>
                                         <span class="card-text">{!! substr($post->description, 0, 200) !!}...</span>
+                                        <p>
+                                            <a href="{{ route ('home.show', $post->id) }}" class="btn btn-success btn-sm mr-1">Read More</a>
+                                            <a href="whatsapp://send?text={{ $post->title }}: {{ route ('home.show', $post->id) }}" class="btn btn-outline-dark btn-sm" data-action="share/whatsapp/share">Share via Whatsapp</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
