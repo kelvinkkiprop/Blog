@@ -20,6 +20,11 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+        // Middleware only applied to these method
+        $this->middleware('auth')->only([
+            'update' // Could add bunch of more methods too
+        ]);
+
     }
 
     /**

@@ -72,7 +72,7 @@
                             @endisset
                         </div>
 
-                        @if(Auth::user())
+                        {{-- @if(Auth::user()) --}}
                             <!-- Message -->
                             <div class="form-group mt-2">
                                 <label for="comment"><strong>{{ __('Comment:') }}</strong></label>
@@ -85,7 +85,7 @@
                                 @endif
                             </div>
                             <button type="submit" class="pull-left btn btn-success">Send</button>
-                        @endif
+                        {{-- @endif --}}
                         <a href="{{ route('home.index') }}" class="btn btn-outline-warning">@method('PUT')Cancel<a>
                     </form>
                 </div>
