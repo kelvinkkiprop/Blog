@@ -77,7 +77,7 @@
                             <div class="form-group mt-2">
                                 <label for="comment"><strong>{{ __('Comment:') }}</strong></label>
                                 <textarea id="comment" type="text" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment"
-                                    value="{{ old('comment') }}" placeholder="Enter comment" rows="2" required autofocus></textarea>
+                                    value="{{ old('comment') }}" placeholder="Enter your comment here..." rows="2" required autofocus></textarea>
                                 @if ($errors->has('comment'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('comment') }}</strong>
