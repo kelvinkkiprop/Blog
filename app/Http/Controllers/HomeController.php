@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Menu\Post;
 use App\Menu\PostComment;
 use App\Menu\PostLike;
+use App\Menu\Visitor;
 use App\Other\PostCategory;
+use DB;
 
 class HomeController extends Controller
 {
@@ -40,12 +42,15 @@ class HomeController extends Controller
         $posts = Post::with(['PostCategory', 'PostLikes', 'PostDisLikes'])->orderBy('id', 'desc')->paginate(7);
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
+        $visitors = Visitor::select('country_code','country_name',DB::raw('SUM(visits) as visits'))->groupBy(['visits','country_code','country_name'])->orderBy('visits', 'desc')->get();
 
+        // return $visitors;
         // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
             'post_categories' => $post_categories,
+            'visitors' => $visitors,
         ]);
     }
 
@@ -119,7 +124,7 @@ class HomeController extends Controller
          //Filter by category
          $posts = Post::where(function($query) use($id){
             $query->where('category', $id);
-        })->orderBy('id', 'desc')->paginate(10);
+        })->orderBy('id', 'desc')->paginate(7);
 
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();

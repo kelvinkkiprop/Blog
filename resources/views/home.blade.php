@@ -14,16 +14,25 @@
                     <!-- Posts -->
                     @if(count($posts)>0)
                     @foreach ($posts as $post)
-                        <div class="card">
+                        <div class="card post-card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-ll-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="col-ll-3 col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                                        style="
                                         @if($post->image!=null)
-                                             <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
+                                            background-image: url({{env("UPLOADED_IMAGES_STORAGE_URL").$post->image}});
+                                            background-position: center; background-repeat: no-repeat;background-size: contain;
+                                        @else
+                                            background-image: url({{asset("images/no_image_avail.png").$post->image}});
+                                            background-position: center; background-repeat: no-repeat;background-size: contain;
+                                        @endif
+                                        ">
+                                        {{-- @if($post->image!=null)
+                                            <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
                                             <img class="card-img-top1" src="{{env("UPLOADED_IMAGES_STORAGE_URL").$post->image}}" alt="Image">
                                         @else
                                             <img class="card-img-top1" src="{{ asset('images/no_image_avail.png') }}" height="120" alt="No image">
-                                        @endif
+                                        @endif --}}
                                     </div>
                                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                         <h6 class="card-title1"><strong><a href="{{ route ('home.show', $post->id) }}">{{$post->title}}</a></strong></h6>
@@ -117,17 +126,22 @@
                     <!-- Visitors -->
                     <div class="card p-3">
                         <h6><strong>Visitors</strong></h6>
-                        <ul style="list-style-type:square">
-                            @if(count($post_categories)>0)
-                                @foreach ($post_categories as $category)
-                                    <a href="{{ route ('home.edit', $category->id) }}"><li>{{$category->name}}</li></a>
+
+                        <div class="card-columns">
+                            @if(count($visitors)>0)
+                                @foreach ($visitors as $visitor)
+                                    <p class="text-nowrap">
+                                        <img height="14" width="28" src="{{ asset('images/CountryFlags/'.$visitor->country_code.'.PNG')}}" alt="Flag"/>
+                                        &nbsp;<small>{{$visitor->visits}}</small></p>
                                 @endforeach
                             @else
                                 <div class="p-5">
-                                    <p class="text-center text-muted">No post categories</p>
+                                    <p class="text-center text-muted">No visitors</p>
                                 </div>
                             @endif
-                        </ul>
+                        </div>
+
+
                     </div>
 
 

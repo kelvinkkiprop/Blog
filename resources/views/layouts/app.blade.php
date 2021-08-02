@@ -78,12 +78,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('welcome') }}">{{ __('Explore') }}</a>
+                                    <a class="dropdown-item" href="{{ route('welcome') }}">
+                                        <i class="fa fa-globe fw-fa" aria-hidden="true"></i>{{ __('Explore') }}</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out-alt fw-fa" aria-hidden="true"></i>{{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

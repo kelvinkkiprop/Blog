@@ -88,17 +88,18 @@ Route::get('{any}', 'Other\WelcomeController@index')->where("any", ".*");
 
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Commands Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/commands', function() {
-    Artisan::call('storage:link');
+Route::get('commands', function () {
+    Artisan::call('config:clear');
     Artisan::call('cache:clear');
-    Artisan::call('config:cache');
     Artisan::call('view:clear');
-    Artisan::call('npm run watch');
-    return 'DONE'; //Return anything
+    Artisan::call('route:clear');
+
+    return back()->with('success', 'Commands executed successfully!');
 });
+
+

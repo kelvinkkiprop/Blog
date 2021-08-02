@@ -83,4 +83,15 @@ Route::resource('feedbacks', 'MainMenu\FeedbackController');
 
 
 
+/*
+|--------------------------------------------------------------------------
+| Visitors Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::post('save-visitor', 'MainMenu\VisitorController@saveVisitor');
+
+
+
+
 

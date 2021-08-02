@@ -64,6 +64,11 @@ $fa-font-path:"../webfonts";
         text-decoration: none;
     }
 }
+.post-card{
+    border:none !important;
+    border-radius: 0 !important;
+    border-left: 3px solid $green !important;
+}
 .pagination{
     .page-link {
         color: $green;
@@ -74,7 +79,7 @@ $fa-font-path:"../webfonts";
     .page-item.active .page-link {
         background-color: $green;
         border-color: $green;
-    }              
+    }
     .page-item.active .page-link {
         z-index: 3;
         color: $white;
@@ -101,7 +106,7 @@ $fa-font-path:"../webfonts";
             .router-link-exact-active{
                 background-color: $green;
                 color: $white !important;
-                border-left: $yellow 5px solid; 
+                border-left: $yellow 5px solid;
             }
             .has-treeview{
             .nav-treeview>li>a,.far{
@@ -137,6 +142,6 @@ $fa-font-path:"../webfonts";
     padding: 20px;
     font-size: 14px;
     font-weight: 600;
-    text-align: center;             
+    text-align: center;
 }
 /*--------------------------------------./Footer------------------------------------------*/

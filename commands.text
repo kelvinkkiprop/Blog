@@ -16,6 +16,7 @@ php artisan make:model Menu/Post -m
 php artisan make:model Menu/Message -m
 php artisan make:model Menu/Information -m
 php artisan make:model Menu/PostLike -m
+php artisan make:model Menu/Visitor -m
 
 4. Seeders
 php artisan make:seeder UserStatusSeeder
@@ -26,13 +27,21 @@ php artisan make:controller MainMenu/WelcomeController
 php artisan make:controller MainMenu/PostController -r
 php artisan make:controller MainMenu/MessageController -r
 php artisan make:controller MainMenu/InformationController -r
+php artisan make:controller MainMenu/VisitorController
 
 6. API Controllers
 php artisan make:controller MainMenu/UserController -r
 php artisan make:controller Settings/ProfileController -r
 
-7.Middleware
+7. Middleware
 php artisan make:middleware AdminsOnly
+
+7. IMPORTANT COMMANDS
+php artisan config:clear
+php artisan cache:clear
+composer dump-autoload
+php artisan view:clear
+php artisan route:clear
 
 
 <!--------------------Vue------------------>

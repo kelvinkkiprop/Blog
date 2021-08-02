@@ -48323,6 +48323,12 @@ readers do not read off random characters that represent icons */
   text-decoration: none;
 }
 
+.post-card {
+  border: none !important;
+  border-radius: 0 !important;
+  border-left: 3px solid #38c172 !important;
+}
+
 .pagination .page-link {
   color: #38c172;
 }

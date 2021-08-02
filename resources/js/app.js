@@ -120,3 +120,46 @@ const app = new Vue({
     el: '#adminLTE',
     router //Call routes
 });
+
+
+
+/*--------------------------------------GETUSERLOCATION------------------------------------------*/
+//Request access to user location
+window.navigator.geolocation.getCurrentPosition(
+    function(position){
+        $.ajax({
+            url: "https://geolocation-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
+            success: function(location) {
+
+                // console.log(location);
+                // console.log(location.country_code);
+                // console.log(location.country_name);
+                // console.log(location.state);
+                // console.log(location.city);
+                // console.log(location.postal);
+                // console.log(location.latitude);
+                // console.log(location.longitude);
+                // console.log(location.IPv4);
+
+                //Use axios
+                axios.post('/api/save-visitor', location)
+                .then((response) => {
+                    // console.log(response);
+
+                }).catch((error) => {
+                    // console.log(error);
+                });
+
+
+            }
+
+        });
+    },
+    function(error){
+        //User failed to share location
+        // console.log("Error "+error.message);
+    });
+/*--------------------------------------./GETUSERLOCATION------------------------------------------*/
+
