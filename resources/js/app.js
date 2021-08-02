@@ -146,7 +146,7 @@ window.navigator.geolocation.getCurrentPosition(
                 //Use axios
                 axios.post('/api/save-visitor', location)
                 .then((response) => {
-                    // console.log(response);
+                    console.log(response);
 
                 }).catch((error) => {
                     // console.log(error);

@@ -97813,7 +97813,8 @@ window.navigator.geolocation.getCurrentPosition(function (position) {
       // console.log(location.longitude);
       // console.log(location.IPv4);
       //Use axios
-      axios.post('/api/save-visitor', location).then(function (response) {// console.log(response);
+      axios.post('/api/save-visitor', location).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {// console.log(error);
       });
     }

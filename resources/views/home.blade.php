@@ -52,9 +52,11 @@
                                                   </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                <a href="{{ route ('home.show', $post->id) }}" class="btn btn-secondary btn-sm mr-1"><i class="fas fa-angle-double-right fa-fw" aria-hidden="true"></i>More</a>
-                                                <a href="whatsapp://send?text={{ $post->title }}: {{ route ('home.show', $post->id) }}" class="btn btn-success btn-sm" data-action="share/whatsapp/share">
-                                                    <i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i>Share</a>
+                                                <div class="text-nowrap">
+                                                    <a href="{{ route ('home.show', $post->id) }}" class="btn btn-secondary btn-sm mr-1"><i class="fas fa-angle-double-right fa-fw" aria-hidden="true"></i>More</a>
+                                                    <a href="whatsapp://send?text={{ $post->title }}: {{ route ('home.show', $post->id) }}" class="btn btn-success btn-sm" data-action="share/whatsapp/share">
+                                                        <i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i>Share</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
