@@ -34,7 +34,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->paginate(5);
+        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->paginate(7);
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 

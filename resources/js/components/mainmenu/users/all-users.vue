@@ -6,50 +6,56 @@
 
                  <!-- Card -->
                 <div class="card">
+                    <div v-if="users.length > 0">
 
-                    <div class="card-header">
-                        <h3 class="card-title">Users</h3>
-                        <div class="card-tools">
-                            <router-link to="create-user" class="btn btn-success btn-sm">Add New
-                                <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>
-                            </router-link>
+                        <div class="card-header">
+                            <h3 class="card-title">Users</h3>
+                            <div class="card-tools">
+                                <router-link to="create-user" class="btn btn-success btn-sm">Add New
+                                    <i class="fas fa-user-plus fa-fw" aria-hidden="true"></i>
+                                </router-link>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="card-body">
-                        <div class="table-responsive p-0">
-                            <table class="table table-striped text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(user, index) in users" :key="user.id">
-                                        <td>{{ index+1 }}</td>
-                                        <td>{{ user.name | capitalize }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.user_type.name }}</td>
-                                        <td><span class="badge badge-success">{{ user.user_status.name }}</span></td>
-                                        <td>{{user.created_at | myDate }}</td>
-                                        <td>
-                                            <router-link :to="'/edit-user/' + user.id" class="btn btn-dark btn-sm">
-                                                <i class="fas fa-edit" aria-hidden="true"></i>
-                                            </router-link>
-                                            <button class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
-                                                <i class="fas fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>                        
+                        <div class="card-body">
+                            <div class="table-responsive p-0">
+                                <table class="table table-striped text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(user, index) in users" :key="user.id">
+                                            <td>{{ index+1 }}</td>
+                                            <td>{{ user.name | capitalize }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.user_type.name }}</td>
+                                            <td><span class="badge badge-success">{{ user.user_status.name }}</span></td>
+                                            <td>{{user.created_at | myDate }}</td>
+                                            <td>
+                                                <router-link :to="'/edit-user/' + user.id" class="btn btn-dark btn-sm">
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
+                                                </router-link>
+                                                <button class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
+                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div v-else>
+                        <p class="text-muted text-center p-5">No information found</p>
                     </div>
 
                 </div>
@@ -70,13 +76,13 @@
 
         //Data
         data() {
-            return { 
+            return {
                 users : {},
                 user: {
                     name: '',
                     email: '',
                     type: ''
-                },               
+                },
             }
         },
 
@@ -84,7 +90,7 @@
         methods: {
 
             //Load
-            loadUsers(){                            
+            loadUsers(){
                 axios.get('api/users')
                 .then(response => {
                     this.users = response.data;
@@ -93,7 +99,7 @@
             },
 
             //Delete User
-            deleteUser(id){               
+            deleteUser(id){
                 //Show
                 Swal.fire({
                 title: 'Delete?',
@@ -103,12 +109,12 @@
                 confirmButtonColor: '#7BB32D',
                 cancelButtonColor: '#881F1C',
                 confirmButtonText: 'Yes'
-                }).then((result) => {      
-                    if (result.isConfirmed) {       
-                        //Send request to serve   
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //Send request to serve
                         axios.delete('/api/users/'+id).then((response)=>{
-                            // console.log(response);  
-                            //Show                    
+                            // console.log(response);
+                            //Show
                             this.$toastr.e(""+response.data.message, "Success");
                             //Call
                             this.loadUsers();
@@ -116,8 +122,8 @@
 
                     }
                 }).catch(error => {
-                    var toastr = this.$toastr;                   
-                    toastr.e('Failed to delete user', "Error");                    
+                    var toastr = this.$toastr;
+                    toastr.e('Failed to delete user', "Error");
                 })
             }
 

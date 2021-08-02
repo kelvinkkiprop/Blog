@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Title -->
     <title>{{ config('app.name', 'Blog') }}</title>
+    <!--FivoIcon-->
+    <link href="{{ asset('images/BizTalkCapital3.png') }}" rel="icon" type="image/x-icon"/>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Ionicons CDN -->

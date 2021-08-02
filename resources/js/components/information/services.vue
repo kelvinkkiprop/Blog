@@ -17,35 +17,44 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="table-responsive p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Category</th>
-                                        <th>Description</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ '•' }}</td>
-                                         <td>{{ info.title | capitalize }}</td>
-                                        <td v-html="info.description "></td>
-                                        <td>{{ info.created_at | myDate }}</td>
-                                        <td class="text-nowrap">
-                                            <router-link :to="'/edit-info/' + info.id" class="btn btn-dark btn-sm">
-                                                <i class="fas fa-edit" aria-hidden="true"></i>
-                                            </router-link>
-                                            <button class="btn btn-danger btn-sm" @click="deleteInfo(info.id)">
-                                                <i class="fas fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                        <div v-if="Object.keys(info).length">
+
+                            <div class="table-responsive p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ '•' }}</td>
+                                            <td>{{ info.title | capitalize }}</td>
+                                            <td v-html="info.description "></td>
+                                            <td>{{ info.created_at | myDate }}</td>
+                                            <td class="text-nowrap">
+                                                <router-link :to="'/edit-info/' + info.id" class="btn btn-dark btn-sm">
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
+                                                </router-link>
+                                                <button class="btn btn-danger btn-sm" @click="deleteInfo(info.id)">
+                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
+                        <div v-else>
+                            <p class="text-muted text-center p-5">No information found</p>
+                        </div>
+
                     </div>
 
                 </div>

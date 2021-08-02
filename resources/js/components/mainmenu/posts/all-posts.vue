@@ -6,50 +6,55 @@
 
                  <!-- Card -->
                 <div class="card">
+                    <div v-if="posts.length > 0">
 
-                    <div class="card-header">
-                        <h3 class="card-title">Posts</h3>
-                        <div class="card-tools">
-                            <router-link to="create-post" class="btn btn-success btn-sm">Add New
-                                <i class="fas fa-blog fa-fw" aria-hidden="true"></i>
-                            </router-link>
+                        <div class="card-header">
+                            <h3 class="card-title">Posts</h3>
+                            <div class="card-tools">
+                                <router-link to="create-post" class="btn btn-success btn-sm">Add New
+                                    <i class="fas fa-blog fa-fw" aria-hidden="true"></i>
+                                </router-link>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Category</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(post, index) in posts" :key="post.id">
+                                            <td>{{ index+1 }}</td>
+                                            <td>{{ post.post_category.name }}</td>
+                                            <td>{{ post.title | capitalize }}</td>
+                                            <td v-html=" post.description "></td>
+                                            <td><img :src="'storage/blog_images/'+post.image" alt="Image" title="View"/></td>
+                                            <td>{{post.created_at | myDate }}</td>
+                                            <td class="text-nowrap">
+                                                <router-link :to="'/edit-post/' + post.id" class="btn btn-dark btn-sm">
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
+                                                </router-link>
+                                                <button class="btn btn-danger btn-sm" @click="deletePost(post.id)">
+                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="card-body">
-                        <div class="table-responsive p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Category</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(post, index) in posts" :key="post.id">
-                                        <td>{{ index+1 }}</td>
-                                         <td>{{ post.post_category.name }}</td>
-                                        <td>{{ post.title | capitalize }}</td>
-                                        <td v-html=" post.description "></td>
-                                        <td><img :src="'storage/blog_images/'+post.image" alt="Image" title="View"/></td>
-                                        <td>{{post.created_at | myDate }}</td>
-                                        <td class="text-nowrap">
-                                            <router-link :to="'/edit-post/' + post.id" class="btn btn-dark btn-sm">
-                                                <i class="fas fa-edit" aria-hidden="true"></i>
-                                            </router-link>
-                                            <button class="btn btn-danger btn-sm" @click="deletePost(post.id)">
-                                                <i class="fas fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div v-else>
+                        <p class="text-muted text-center p-5">No information found</p>
                     </div>
 
                 </div>

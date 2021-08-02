@@ -9,7 +9,8 @@
             <div class="row">
 
                 <!-- Left -->
-                <div class="col-md-8">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8 col-xl-4">
+
                     <!-- Posts -->
                     @if(count($posts)>0)
                     @foreach ($posts as $post)
@@ -18,10 +19,10 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         @if($post->image!=null)
-                                            <img class="card-img-top1" src="/storage/app/public/blog_images/{{$post->image}}" alt="Image">
-                                            {{-- <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image"> --}}
+                                             <img class="card-img-top1" src="/storage/blog_images/{{$post->image}}" alt="Image">
+                                            <img class="card-img-top1" src="{{env("UPLOADED_IMAGES_STORAGE_URL").$post->image}}" alt="Image">
                                         @else
-                                            <img class="card-img-top1" src="/images/no_image_avail.png" height="120" alt="No image">
+                                            <img class="card-img-top1" src="{{ asset('images/no_image_avail.png') }}" height="120" alt="No image">
                                         @endif
                                     </div>
                                     <div class="col-md-9">
@@ -50,7 +51,7 @@
                 <!-- ./Left -->
 
                 <!-- Right -->
-                <div class="col-md-4">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <!-- Search -->
                     <div class="card p-3">
                         <form method="POST" action="{{ route ('home.store') }}">
@@ -66,6 +67,7 @@
                             </div>
                         </form>
                     </div>
+
                     <!-- Recent Posts -->
                     <div class="card p-3">
                         <h6><strong>Recent Posts</strong></h6>
@@ -81,6 +83,7 @@
                             @endif
                         </ul>
                     </div>
+
                     <!-- Categories -->
                     <div class="card p-3">
                         <h6><strong>Categories</strong></h6>
@@ -96,6 +99,7 @@
                             @endif
                         </ul>
                     </div>
+
                 </div>
                 <!-- ./Right -->
 

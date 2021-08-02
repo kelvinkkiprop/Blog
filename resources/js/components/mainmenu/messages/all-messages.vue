@@ -17,39 +17,44 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="table-responsive p-0">
-                            <table class="table table-striped text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Subject</th>
-                                        <th>Body</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(message, index) in messages" :key="message.id">
-                                        <td>{{ index+1 }}</td>
-                                        <td>{{ message.name | capitalize }}</td>
-                                        <td>{{ message.email }}</td>
-                                        <td>{{ message.subject }}</td>
-                                        <td>{{ message.body }}</td>
-                                        <td>{{ message.created_at | myDate }}</td>
-                                        <td>
-                                            <router-link :to="'/show-feedback/' + message.id" class="btn btn-dark btn-sm">
-                                                <i class="fas fa-eye" aria-hidden="true"></i>
-                                            </router-link>
-                                            <button class="btn btn-danger btn-sm" @click="deleteMessage(message.id)">
-                                                <i class="fas fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>                        
+                        <div v-if="messages.length > 0">
+                            <div class="table-responsive p-0">
+                                <table class="table table-striped text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Body</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(message, index) in messages" :key="message.id">
+                                            <td>{{ index+1 }}</td>
+                                            <td>{{ message.name | capitalize }}</td>
+                                            <td>{{ message.email }}</td>
+                                            <td>{{ message.subject }}</td>
+                                            <td>{{ message.body }}</td>
+                                            <td>{{ message.created_at | myDate }}</td>
+                                            <td>
+                                                <router-link :to="'/show-feedback/' + message.id" class="btn btn-dark btn-sm">
+                                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                                </router-link>
+                                                <button class="btn btn-danger btn-sm" @click="deleteMessage(message.id)">
+                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <p class="text-muted text-center p-5">No information found</p>
+                        </div>
                     </div>
 
                 </div>
@@ -70,8 +75,8 @@
 
         //Data
         data() {
-            return { 
-                messages : {},             
+            return {
+                messages : {},
             }
         },
 
@@ -79,7 +84,7 @@
         methods: {
 
             //Load
-            loadMessages(){                            
+            loadMessages(){
                 axios.get('api/feedbacks')
                 .then(response => {
                     this.messages = response.data;
@@ -88,7 +93,7 @@
             },
 
             //Delete User
-            deleteMessage(id){               
+            deleteMessage(id){
                 //Show
                 Swal.fire({
                 title: 'Delete?',
@@ -98,12 +103,12 @@
                 confirmButtonColor: '#7BB32D',
                 cancelButtonColor: '#881F1C',
                 confirmButtonText: 'Yes'
-                }).then((result) => {      
-                    if (result.isConfirmed) {       
-                        //Send request to serve   
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //Send request to serve
                         axios.delete('/api/feedbacks/'+id).then((response)=>{
-                            // console.log(response);  
-                            //Show                    
+                            // console.log(response);
+                            //Show
                             this.$toastr.e(""+response.data.message, "Success");
                             //Call
                             this.loadMessages();
@@ -111,8 +116,8 @@
 
                     }
                 }).catch(error => {
-                    var toastr = this.$toastr;                   
-                    toastr.e('Failed to delete message', "Error");                    
+                    var toastr = this.$toastr;
+                    toastr.e('Failed to delete message', "Error");
                 })
             }
 
