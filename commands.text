@@ -15,6 +15,7 @@ php artisan make:model Other/PostCategory -m
 php artisan make:model Menu/Post -m
 php artisan make:model Menu/Message -m
 php artisan make:model Menu/Information -m
+php artisan make:model Menu/PostLike -m
 
 4. Seeders
 php artisan make:seeder UserStatusSeeder

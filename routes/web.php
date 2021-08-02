@@ -19,6 +19,8 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 Route::resource('home', 'HomeController');
+Route::get('like/{id}', 'HomeController@saveLike')->name('like');
+Route::get('dislike/{id}', 'HomeController@saveDislike')->name('dislike');
 
 
 

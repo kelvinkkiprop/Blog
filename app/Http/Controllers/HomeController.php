@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Menu\Post;
 use App\Menu\PostComment;
+use App\Menu\PostLike;
 use App\Other\PostCategory;
 
 class HomeController extends Controller
@@ -22,7 +23,9 @@ class HomeController extends Controller
         // $this->middleware('auth');
         // Middleware only applied to these method
         $this->middleware('auth')->only([
-            'update' // Could add bunch of more methods too
+            'update',
+            'saveLike',
+            'saveDislike' // Could add bunch of more methods too
         ]);
 
     }
@@ -34,7 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('PostCategory')->orderBy('id', 'desc')->paginate(7);
+        $posts = Post::with(['PostCategory', 'PostLikes', 'PostDisLikes'])->orderBy('id', 'desc')->paginate(7);
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 
@@ -143,7 +146,7 @@ class HomeController extends Controller
             'comment' => 'required|string|max:255',
         ]);
 
-        $post_comment = new PostComment();
+        $post_comment = new PostComment;
         $post_comment->post_id = $id;
         $post_comment->uid = Auth::user()->id;
         $post_comment->comment = $request->input('comment');
@@ -162,6 +165,62 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
+
+    }
+
+    /**
+     * Like
+     */
+    public function saveLike($id)
+    {
+        //Check
+        $uid = Auth::user()->id;
+        $like_exists = PostLike::where('post_id', $id)->where('user_id', $uid)->first();
+        // return $like_exists;
+        if($like_exists){
+            //Update
+            $like_id = $like_exists->id;
+            $post_like = PostLike::find($like_id);
+            $post_like->post_id = $id;
+            $post_like->user_id = Auth::user()->id;
+            $post_like->status = 'Liked';
+            $post_like->save();
+        }else{
+            //New
+            $post_like = new PostLike;
+            $post_like->post_id = $id;
+            $post_like->user_id = Auth::user()->id;
+            $post_like->status = 'Liked';
+            $post_like->save();
+        }
+        return redirect()->back()->with('info', 'Like saved successfully!');
+
+    }/**
+     * Dislike
+     */
+    public function saveDislike($id)
+    {
+        //Check
+        $uid = Auth::user()->id;
+        $like_exists = PostLike::where('post_id', $id)->where('user_id', $uid)->first();
+        // return $like_exists;
+        if($like_exists->count()>0){
+            //Update
+            $like_id = $like_exists->id;
+            $post_like = PostLike::find($like_id);
+            $post_like->post_id = $id;
+            $post_like->user_id = Auth::user()->id;
+            $post_like->status = 'Disliked';
+            $post_like->save();
+        }else{
+            //New
+            $post_like = new PostLike;
+            $post_like->post_id = $id;
+            $post_like->user_id = Auth::user()->id;
+            $post_like->status = 'Disliked';
+            $post_like->save();
+        }
+        return redirect()->back()->with('info', 'Status updated successfully!');
 
     }
 
