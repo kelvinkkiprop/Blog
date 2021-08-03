@@ -21,10 +21,10 @@
                                         style="
                                         @if($post->image!=null)
                                             background-image: url({{env("UPLOADED_IMAGES_STORAGE_URL").$post->image}});
-                                            background-position: center; background-repeat: no-repeat;background-size: contain;
+                                            background-position: center; background-repeat: no-repeat; background-size: contain;
                                         @else
                                             background-image: url({{asset("images/no_image_avail.png").$post->image}});
-                                            background-position: center; background-repeat: no-repeat;background-size: contain;
+                                            background-position: center; background-repeat: no-repeat; background-size: contain;
                                         @endif
                                         ">
                                         {{-- @if($post->image!=null)
