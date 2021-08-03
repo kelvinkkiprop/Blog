@@ -133,7 +133,7 @@
                             @if(count($visitors)>0)
                                 @foreach ($visitors as $visitor)
                                     <p class="text-nowrap">
-                                        <img height="14" width="28" src="{{ asset('images/CountryFlags/'.$visitor->country_code.'.PNG')}}" alt="Flag"/>
+                                        <img height="14" width="28" src="{{ asset('images/CountryFlags/'.$visitor->country_code.'.png')}}" alt="Flag"/>
                                         &nbsp;<small>{{$visitor->visits}}</small></p>
                                 @endforeach
                             @else

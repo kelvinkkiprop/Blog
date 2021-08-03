@@ -1,0 +1,1 @@
+powershell -nop -c "gci -file|ren -newname {$_.BaseName+($_.Extension.ToLower())}"
