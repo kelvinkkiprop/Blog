@@ -85,7 +85,7 @@
                                 <input id="search_term" type="text" class="form-control{{ $errors->has('search_term') ? ' is-invalid' : '' }}"
                                     name="search_term" value="{{ old('search_term') }}" required autofocus/>
                                 <div class="input-group-append">
-                                    <button class="input-group-text btn-success" type="submit">
+                                    <button class="input-group-text" type="submit">
                                         <i class="fa fa-search fa-fw" aria-hidden="true"></i>Search
                                     </button>
                                 </div>

@@ -88,11 +88,14 @@ class HomeController extends Controller
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
 
+        $visitors = Visitor::select('country_code','country_name',DB::raw('SUM(visits) as visits'))->groupBy(['visits','country_code','country_name'])->orderBy('visits', 'desc')->get();
+
         // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
             'post_categories' => $post_categories,
+            'visitors' => $visitors,
         ]);
 
 
@@ -128,12 +131,14 @@ class HomeController extends Controller
 
         $recent_posts = Post::orderBy('id', 'desc')->get()->take(5);
         $post_categories = PostCategory::orderBy('name', 'asc')->select(['id','name'])->get();
+        $visitors = Visitor::select('country_code','country_name',DB::raw('SUM(visits) as visits'))->groupBy(['visits','country_code','country_name'])->orderBy('visits', 'desc')->get();
 
         // return $posts;
         return view('home')->with([
             'posts' => $posts,
             'recent_posts' => $recent_posts,
             'post_categories' => $post_categories,
+            'visitors' => $visitors,
         ]);
     }
 
