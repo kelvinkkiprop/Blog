@@ -17,6 +17,7 @@ class VisitorController extends Controller
      */
     public function saveVisitor(Request $request)
     {
+        return $request->all();
 
         $this -> validate($request, [
             'IPv4' => 'required',
