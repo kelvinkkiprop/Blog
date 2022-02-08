@@ -38,7 +38,8 @@
                                         <h6 class="card-title1"><strong><a href="{{ route ('home.show', $post->id) }}">{{$post->title}}</a></strong></h6>
                                         <span class="text-muted mt-1 mb-1"><strong>{{Carbon\Carbon::parse($post->created_at)->format('d M, Y')}}</strong></span>
                                         <h6 class="card-subtitle mt-1 mb-1"><span class="badge badge-pill badge-warning">@isset($post->PostCategory){{$post->PostCategory->name}}@endisset</span></h6>
-                                        <span class="card-text">{!! substr($post->description, 0, 500) !!}...</span>
+                                        {{-- <p>{{ Illuminate\Support\Str::limit($post->description, 50, '...')}}</p> --}}
+                                        <span class="card-text">{{Illuminate\Support\Str::limit(strip_tags($post->description), 500, '...')}} </span>
 
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
